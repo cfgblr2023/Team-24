@@ -7,4 +7,4 @@ const adminSchema = new mongoose.Schema({
     contact: String,
 });
 
-export const Admin = mongoose.model('admins', adminSchema);
+module.exports = Admin = mongoose.model('admins', adminSchema);

@@ -8,4 +8,4 @@ const missionSchema = new mongoose.Schema({
     vacancy: Number
 });
 
-export const Mission = mongoose.model('missions', missionSchema);
+module.exports = Mission = mongoose.model('missions', missionSchema);

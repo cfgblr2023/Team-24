@@ -10,4 +10,4 @@ const internSchema = new mongoose.Schema({
     endDate: Date,
 });
 
-export const Intern = mongoose.model('interns', internSchema);
+module.exports = Intern = mongoose.model('interns', internSchema);
