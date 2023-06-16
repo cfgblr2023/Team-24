@@ -5,7 +5,8 @@ const missionSchema = new mongoose.Schema({
     name: String,
     status: String,
     type: String,
-    vacancy: Number
+    vacancy: Number,
+    about: String
 });
 
 module.exports = Mission = mongoose.model('missions', missionSchema);
