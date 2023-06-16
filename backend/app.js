@@ -45,10 +45,10 @@ app.post("/api/add-mission", async (req, res) => {
     }
 })
 
-app.get("/api/get-mission", async (req, res) => {
+app.get("/api/get-missions", async (req, res) => {
     try {
-        const missions = Mission.find();
-        req.send(missions)
+        const missions = await Mission.find({});
+        res.send(missions)
     } catch (e) {
         console.log(e)
         res.send("Something Went Wrong. Please try again. " + e);
