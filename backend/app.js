@@ -54,3 +54,13 @@ app.get("/api/get-missions", async (req, res) => {
         res.send("Something Went Wrong. Please try again. " + e);
     }
 })
+
+app.post("/api/delete-mission", async (req, res) => {
+    try {
+        await Mission.deleteOne({ _id: req.body.missionID });
+        res.send().status(200)
+    } catch (e) {
+        console.log(e)
+        res.send("Something Went Wrong. Please try again. " + e);
+    }
+})
