@@ -4,12 +4,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function Login({ setRole }) {
     const { loginWithRedirect } = useAuth0();
+    const handleLogin = async (role) => {
+      await setRole(role)
+      // loginWithRedirect()
+    }
   return (
     <div className='login-main'>
         <div className='login-header'>Which role do you want to login for?</div>
         <div className='login-controls'>
-            <button className='login-control-button' onClick={() => {setRole("admin"); loginWithRedirect()}}>Admin</button>
-            <button className='login-control-button' onClick={() => {setRole("intern"); loginWithRedirect()}}>Intern</button>
+            <button className='login-control-button' onClick={() => handleLogin("admin")}>Admin</button>
+            <button className='login-control-button' onClick={() => handleLogin("intern")}>Intern</button>
         </div>
     </div>
   )

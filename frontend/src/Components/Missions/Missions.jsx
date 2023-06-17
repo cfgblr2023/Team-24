@@ -4,7 +4,7 @@ import axios from 'axios'
 import "./Missions.css"
 import { useAuth0 } from "@auth0/auth0-react";
 
-function Missions({ role }) {
+function Missions({ role, setRole }) {
     const [newMission, setNewMission] = useState({name: "", about: "", type: "", vacancy: 0, status: "ongoing"})
     const [missions, setMissions] = useState([])
     const { logout, user, isAuthenticated, isLoading } = useAuth0();
@@ -41,7 +41,7 @@ function Missions({ role }) {
     
   return (
     <div className='missions-main'>
-        {isAuthenticated && <div className='add-mission-form'>
+        {true && role === "admin" ? <div className='add-mission-form'>
                 <label for="mission-name">Mission Name</label>
                 <input id="mission-name" value={newMission.name} name="name" onChange={(e) => handleFormChange(e)}/>
                 <label for="mission-about">About</label>    
@@ -51,7 +51,9 @@ function Missions({ role }) {
                 <label for="mission-vacancy">Vacancy</label>
                 <input id="mission-vacancy" value={newMission.vacancy} name="vacancy" onChange={(e) => handleFormChange(e)} />
                 <button id="add-mission" onClick={() => addMission()}>Add</button>
-            </div>}
+            </div>
+            :
+            <div></div>}
         <div className='missions-list'>
         <h3>Missions List</h3>
         {missions.map((mission, index) => {
