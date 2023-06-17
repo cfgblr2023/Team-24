@@ -5,7 +5,6 @@ import "./Missions.css"
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Missions({ role }) {
-    const [newMission, setNewMission] = useState({name: "", about: "", type: "", vacancy: 0, status: "ongoing"})
     const [missions, setMissions] = useState([])
     const { logout, user, isAuthenticated, isLoading } = useAuth0();
 
@@ -13,25 +12,6 @@ function Missions({ role }) {
         await axios.get("http://127.0.0.1:5000/api/get-missions")
         .then((missionsList) => setMissions(missionsList.data))
         .catch((e) => console.log("There is an error with the backend. Please refresh or try again later if the problem persists."))
-    }
-
-    const addMission = async () => {
-        if(newMission.name === "" || newMission.about === "" || newMission.type === "") {
-            alert("Please enter valid data for the mission!")
-            return
-        }
-        else {
-            await axios.post("http://127.0.0.1:5000/api/add-mission", newMission)
-            .catch((e) => console.log("There is an error with the backend. Please refresh or try again later if the problem persists."))
-            getMissions()
-        }
-    }
-
-    const handleFormChange = (e) => {
-        if(e.target.name === "name") setNewMission({...newMission, name: e.target.value})
-        else if(e.target.name === "about") setNewMission({...newMission, about: e.target.value})
-        else if(e.target.name === "type") setNewMission({...newMission, type: e.target.value})
-        else if(e.target.name === "vacancy") setNewMission({...newMission, vacancy: e.target.value})
     }
 
     //on first render
