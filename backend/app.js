@@ -64,3 +64,22 @@ app.post("/api/delete-mission", async (req, res) => {
         res.send("Something Went Wrong. Please try again. " + e);
     }
 })
+
+app.post("/api/update-mission", async (req, res) => {
+    try {
+        const missionID = req.body._id
+        const mission = req.body
+        const response = await Mission.findByIdAndUpdate({"_id": missionID}, 
+            {$set: {
+                name: mission.name,
+                about: mission.about,
+                status: mission.status,
+                type: mission.type,
+                vacancy: mission.vacancy
+            }})
+            res.send(200)
+    } catch(e) {
+        console.log(e)
+        res.send(e).status(400)
+    }
+})
