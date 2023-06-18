@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const Intern = require("./Models/interns.js")
 const Admin = require("./Models/admins.js")
 const Mission = require("./Models/missions.js")
+const Internship = require("./Models/internships.js")
 
 // initalizations and config
 const PORT = process.env.PORT ? process.env.PORT : 5000;
@@ -81,5 +82,26 @@ app.post("/api/update-mission", async (req, res) => {
     } catch(e) {
         console.log(e)
         res.send(e).status(400)
+    }
+})
+
+// intern apis
+app.post("/api/apply", async (req, res) => {
+    try {
+        const internship = new Internship({
+            missionID: req.body.missionID,
+            internID: req.body.internID,
+            status: "ongoing"
+        });
+        let result = await internship.save();
+        result = result.toObject();
+        if (result) {
+            res.send({msg: "Internship added successfully!"});
+        } else {
+            res.send({msg: "There was an error trying to add the internship, please try again."})
+        }
+    } catch(e) {
+        console.log(e)
+        res.send(e).sendStatus(400)
     }
 })
