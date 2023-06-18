@@ -5,9 +5,11 @@ import "./Dashboard.css";
 
 function Dashboard({ role }) {
   const [adminView, setAdminView] = useState("create");
+  const [internView, setInternView] = useState("current");
   const [update, setUpdate] = useState(false);
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
+  const [currentIntern, setCurrentIntern] = useState({id: "1001", name: "Yash Seth"})
   const [newMission, setNewMission] = useState({
     name: "",
     about: "",
@@ -111,6 +113,15 @@ function Dashboard({ role }) {
     else if (e.target.name === "vacancy")
       setCurrentMission({ ...currentMission, vacancy: e.target.value });
   };
+
+  const applyInternship = async (e) => {
+    await axios.post("http://127.0.0.1:5000/api/apply", {
+      internID: currentIntern.id,
+      missionID: missions[e.target.value]._id
+    })
+    .then(alert("You have successfully applied for the internship."))
+    .catch((e) => alert(e))
+  }
 
   return (
     <div className="dashboard-main">
@@ -263,7 +274,53 @@ function Dashboard({ role }) {
           </div>
         </>
       ) : role === "intern" ? (
-        <div>Intern View</div>
+          <div className="intern-main">
+            <div className="intern-header">
+              <h2>Dashboard</h2>
+              <h3>Hi {currentIntern.name}</h3>
+            </div>
+            <div className="intern-controls">
+              <button className="intern-control-btn" onClick={() => setInternView("current")}>Current Internship</button>
+              <button className="intern-control-btn" onClick={() => setInternView("apply")}>Apply for internship</button>
+              <button className="intern-control-btn" onClick={() => setInternView("history")}>History</button>
+            </div>
+            <div className="intern-content">
+              {internView === "current" && <div>Current</div>}
+              {internView === "apply" && 
+              <div className="intern-apply-view">
+                <table>
+                  <tr>
+                    <th>ID</th>
+                    <th>Mission Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Vacancy</th>
+                    <th>Actions</th>
+                  </tr>
+                  {missions.map((mission, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{mission._id}</td>
+                        <td>{mission.name}</td>
+                        <td>{mission.about}</td>
+                        <td>{mission.type}</td>
+                        <td>{mission.vacancy}</td>
+                        <td>
+                          <button
+                            value={index}
+                            onClick={(e) => applyInternship(e)}
+                          >
+                            Apply
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </table>
+              </div>}
+              {internView === "history" && <div>History</div>}
+            </div>
+          </div>
       ) : (
         <div id="login-error-message">
           Please login to get access to the dashboard!
