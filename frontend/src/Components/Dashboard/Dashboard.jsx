@@ -21,7 +21,7 @@ function Dashboard({ role }) {
 
   useEffect(() => {
     fetchMissions();
-    fetchInternships();
+    fetchInternships("ongoing");
   }, []);
 
   const addMission = async () => {
@@ -129,8 +129,8 @@ function Dashboard({ role }) {
     .catch((e) => alert(e))
   }
 
-  const fetchInternships = async () => {
-    await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id})
+  const fetchInternships = async (type) => {
+    await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id, type:type})
     .then((internships) => setInternships(internships.data))
     .catch((e) => alert(e))
   }
@@ -139,7 +139,7 @@ function Dashboard({ role }) {
     await axios.post("http://127.0.0.1:5000/api/complete-internship", {internshipID: internships[0]._id})
     .then(() => alert("Internship Complete"))
     .catch((e) => alert(e))
-    fetchInternships()
+    fetchInternships("ongoing")
   }
 
   return (
@@ -299,9 +299,9 @@ function Dashboard({ role }) {
               <h3>Hi {currentIntern.name}</h3>
             </div>
             <div className="intern-controls">
-              <button className="intern-control-btn" onClick={() => {setInternView("current"); fetchInternships()}}>Current Internship</button>
+              <button className="intern-control-btn" onClick={() => {setInternView("current"); fetchInternships("ongoing")}}>Current Internship</button>
               <button className="intern-control-btn" onClick={() => setInternView("apply")}>Apply for internship</button>
-              <button className="intern-control-btn" onClick={() => setInternView("history")}>History</button>
+              <button className="intern-control-btn" onClick={() => {setInternView("history"); fetchInternships("complete")}}>History</button>
             </div>
             <div className="intern-content">
               {internView === "current" && 
@@ -349,7 +349,17 @@ function Dashboard({ role }) {
                   })}
                 </table>
               </div>}
-              {internView === "history" && <div>History</div>}
+              {internView === "history" && 
+              <div className="intern-history">
+                <table>
+                  <th>Internship ID</th>
+                </table>
+                {internships.map((internship, index) => {
+                  return (<tr key={index}>
+                     <td>{internship._id}</td>
+                     </tr>)
+                })}
+              </div>}
             </div>
           </div>
       ) : (
