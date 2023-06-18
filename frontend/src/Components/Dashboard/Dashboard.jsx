@@ -10,6 +10,7 @@ function Dashboard({ role }) {
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
   const [currentIntern, setCurrentIntern] = useState({id: "1001", name: "Yash Seth"})
+  const [internships, setInternships] = useState([])
   const [newMission, setNewMission] = useState({
     name: "",
     about: "",
@@ -20,6 +21,7 @@ function Dashboard({ role }) {
 
   useEffect(() => {
     fetchMissions();
+    fetchInternships();
   }, []);
 
   const addMission = async () => {
@@ -60,6 +62,17 @@ function Dashboard({ role }) {
   const fetchMissions = async () => {
     await axios
       .get("http://127.0.0.1:5000/api/get-missions")
+      .then((missionsList) => setMissions(missionsList.data))
+      .catch((e) =>
+        console.log(
+          "There is an error with the backend. Please refresh or try again later if the problem persists."
+        )
+      );
+  };
+
+  const fetchMissionDetails = async () => {
+    await axios
+      .get("http://127.0.0.1:5000/api/get-mission")
       .then((missionsList) => setMissions(missionsList.data))
       .catch((e) =>
         console.log(
@@ -115,11 +128,21 @@ function Dashboard({ role }) {
   };
 
   const applyInternship = async (e) => {
+    if(internships.length === 1) {
+      alert("You may only have one internship at any point of time!")
+      return
+    }
     await axios.post("http://127.0.0.1:5000/api/apply", {
       internID: currentIntern.id,
       missionID: missions[e.target.value]._id
     })
     .then(alert("You have successfully applied for the internship."))
+    .catch((e) => alert(e))
+  }
+
+  const fetchInternships = async () => {
+    await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id})
+    .then((internships) => setInternships(internships.data))
     .catch((e) => alert(e))
   }
 
@@ -280,12 +303,20 @@ function Dashboard({ role }) {
               <h3>Hi {currentIntern.name}</h3>
             </div>
             <div className="intern-controls">
-              <button className="intern-control-btn" onClick={() => setInternView("current")}>Current Internship</button>
+              <button className="intern-control-btn" onClick={() => {setInternView("current"); fetchInternships()}}>Current Internship</button>
               <button className="intern-control-btn" onClick={() => setInternView("apply")}>Apply for internship</button>
               <button className="intern-control-btn" onClick={() => setInternView("history")}>History</button>
             </div>
             <div className="intern-content">
-              {internView === "current" && <div>Current</div>}
+              {internView === "current" && 
+              <div className="current-internship">
+                <div className="current-internship-header">
+                  <h4>Internship Details</h4>
+                </div>
+                <div className="current-internship-details">
+                  {internships.length === 1 ? (internships[0]._id) : (<p>Please apply for an internship first!</p>) }
+                </div>
+              </div>}
               {internView === "apply" && 
               <div className="intern-apply-view">
                 <table>
