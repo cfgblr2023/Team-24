@@ -105,3 +105,14 @@ app.post("/api/apply", async (req, res) => {
         res.send(e).sendStatus(400)
     }
 })
+
+app.post("/api/get-internships", async (req, res) => {
+    try {
+        const internships = await Internship.find({internID: req.body.internID});
+        console.log(internships)
+        res.send(internships)
+    } catch (e) {
+        console.log(e)
+        res.send("Something Went Wrong. Please try again. " + e);
+    }
+})
