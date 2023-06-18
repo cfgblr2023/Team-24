@@ -108,11 +108,23 @@ app.post("/api/apply", async (req, res) => {
 
 app.post("/api/get-internships", async (req, res) => {
     try {
-        const internships = await Internship.find({internID: req.body.internID});
-        console.log(internships)
+        const internships = await Internship.find({internID: req.body.internID, status: "ongoing"});
         res.send(internships)
     } catch (e) {
         console.log(e)
         res.send("Something Went Wrong. Please try again. " + e);
+    }
+})
+
+app.post("/api/complete-internship", async (req, res) => {
+    try{
+    const response = await Internship.findByIdAndUpdate({"_id": req.body.internshipID}, 
+            {$set: {
+                status: "complete",
+            }})
+            res.send(200)
+    } catch(e) {
+        console.log(e)
+        res.send(e).status(400)
     }
 })

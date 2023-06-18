@@ -70,17 +70,6 @@ function Dashboard({ role }) {
       );
   };
 
-  const fetchMissionDetails = async () => {
-    await axios
-      .get("http://127.0.0.1:5000/api/get-mission")
-      .then((missionsList) => setMissions(missionsList.data))
-      .catch((e) =>
-        console.log(
-          "There is an error with the backend. Please refresh or try again later if the problem persists."
-        )
-      );
-  };
-
   const deleteMission = async (e) => {
     await axios
       .post("http://127.0.0.1:5000/api/delete-mission", {
@@ -144,6 +133,13 @@ function Dashboard({ role }) {
     await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id})
     .then((internships) => setInternships(internships.data))
     .catch((e) => alert(e))
+  }
+
+  const completeInternship = async () => {
+    await axios.post("http://127.0.0.1:5000/api/complete-internship", {internshipID: internships[0]._id})
+    .then(() => alert("Internship Complete"))
+    .catch((e) => alert(e))
+    fetchInternships()
   }
 
   return (
@@ -314,7 +310,11 @@ function Dashboard({ role }) {
                   <h4>Internship Details</h4>
                 </div>
                 <div className="current-internship-details">
-                  {internships.length === 1 ? (internships[0]._id) : (<p>Please apply for an internship first!</p>) }
+                  {internships.length === 1 ? (
+                  <>
+                    <p>{internships[0]._id}</p>
+                    <button onClick={() => completeInternship()}>Complete</button>
+                  </>) : (<p>Please apply for an internship first!</p>) }
                 </div>
               </div>}
               {internView === "apply" && 
