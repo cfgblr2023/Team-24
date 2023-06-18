@@ -108,7 +108,12 @@ app.post("/api/apply", async (req, res) => {
 
 app.post("/api/get-internships", async (req, res) => {
     try {
-        const internships = await Internship.find({internID: req.body.internID, status: "ongoing"});
+        let internships = []
+        if(req.body.type === "ongoing") {
+            internships = await Internship.find({internID: req.body.internID, status: "ongoing"});
+        } else if(req.body.type === "complete") {
+            internships = await Internship.find({internID: req.body.internID, status: "complete"});
+        }
         res.send(internships)
     } catch (e) {
         console.log(e)
