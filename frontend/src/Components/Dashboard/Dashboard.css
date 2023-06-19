@@ -115,3 +115,12 @@
   -webkit-filter: saturate(0.2) opacity(0.5);
   cursor: not-allowed;
 }
+
+.content-loader {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
