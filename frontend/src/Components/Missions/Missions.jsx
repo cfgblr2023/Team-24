@@ -2,11 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import "./Missions.css"
-import { useAuth0 } from "@auth0/auth0-react";
 
-function Missions({ role }) {
+function Missions() {
     const [missions, setMissions] = useState([])
-    const { logout, user, isAuthenticated, isLoading } = useAuth0();
 
     const getMissions = async () => {
         await axios.get("http://127.0.0.1:5000/api/get-missions")
