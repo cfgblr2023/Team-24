@@ -5,8 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 function Login({ setRole }) {
     const { loginWithRedirect } = useAuth0();
     const handleLogin = async (role) => {
-      await setRole(role)
-      // loginWithRedirect()
+      localStorage.setItem( 'auth-role', role );
+      loginWithRedirect()
     }
   return (
     <div className='login-main'>

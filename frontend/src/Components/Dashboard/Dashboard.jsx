@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Dashboard.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Dashboard({ role }) {
   const [adminView, setAdminView] = useState("create");
@@ -19,9 +20,11 @@ function Dashboard({ role }) {
     status: "ongoing",
   });
 
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
   useEffect(() => {
     fetchMissions();
-    fetchInternships("ongoing");
+    fetchInternships();
   }, []);
 
   const addMission = async () => {
@@ -129,8 +132,8 @@ function Dashboard({ role }) {
     .catch((e) => alert(e))
   }
 
-  const fetchInternships = async (type) => {
-    await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id, type:type})
+  const fetchInternships = async () => {
+    await axios.post("http://127.0.0.1:5000/api/get-internships", {internID: currentIntern.id})
     .then((internships) => setInternships(internships.data))
     .catch((e) => alert(e))
   }
@@ -139,12 +142,12 @@ function Dashboard({ role }) {
     await axios.post("http://127.0.0.1:5000/api/complete-internship", {internshipID: internships[0]._id})
     .then(() => alert("Internship Complete"))
     .catch((e) => alert(e))
-    fetchInternships("ongoing")
+    fetchInternships()
   }
 
   return (
     <div className="dashboard-main">
-      {role === "admin" ? (
+      {localStorage.getItem('auth-role') === "admin" && isAuthenticated ? (
         <>
           <div className="admin-controls">
             <button
@@ -292,16 +295,16 @@ function Dashboard({ role }) {
             {adminView === "interns" && <div>Interns View</div>}
           </div>
         </>
-      ) : role === "intern" ? (
+      ) : localStorage.getItem('auth-role') === "intern" && isAuthenticated ? (
           <div className="intern-main">
             <div className="intern-header">
               <h2>Dashboard</h2>
               <h3>Hi {currentIntern.name}</h3>
             </div>
             <div className="intern-controls">
-              <button className="intern-control-btn" onClick={() => {setInternView("current"); fetchInternships("ongoing")}}>Current Internship</button>
+              <button className="intern-control-btn" onClick={() => {setInternView("current"); fetchInternships()}}>Current Internship</button>
               <button className="intern-control-btn" onClick={() => setInternView("apply")}>Apply for internship</button>
-              <button className="intern-control-btn" onClick={() => {setInternView("history"); fetchInternships("complete")}}>History</button>
+              <button className="intern-control-btn" onClick={() => setInternView("history")}>History</button>
             </div>
             <div className="intern-content">
               {internView === "current" && 
@@ -349,17 +352,7 @@ function Dashboard({ role }) {
                   })}
                 </table>
               </div>}
-              {internView === "history" && 
-              <div className="intern-history">
-                <table>
-                  <th>Internship ID</th>
-                </table>
-                {internships.map((internship, index) => {
-                  return (<tr key={index}>
-                     <td>{internship._id}</td>
-                     </tr>)
-                })}
-              </div>}
+              {internView === "history" && <div>History</div>}
             </div>
           </div>
       ) : (
