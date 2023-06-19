@@ -37,7 +37,7 @@ function Dashboard() {
       newMission.about === "" ||
       newMission.type === ""
     ) {
-      alert("Please enter valid data htmlFor the mission!");
+      alert("Please enter valid data for the mission!");
       setNewMission({
         name: "",
         about: "",
