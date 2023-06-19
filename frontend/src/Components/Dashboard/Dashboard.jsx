@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Circles } from "react-loader-spinner";
 
-function Dashboard({ role }) {
+function Dashboard() {
   const [adminView, setAdminView] = useState("create");
   const [internView, setInternView] = useState("current");
   const [update, setUpdate] = useState(false);
