@@ -6,8 +6,8 @@ import "./Missions.css"
 function Missions() {
     const [missions, setMissions] = useState([])
 
-    const getMissions = async () => {
-        await axios.get("http://127.0.0.1:5000/api/get-missions")
+    const getMissions = async (missionState) => {
+        await axios.post("http://127.0.0.1:5000/api/get-missions",{missionState: "ongoing"})
         .then((missionsList) => setMissions(missionsList.data))
         .catch((e) => console.log("There is an error with the backend. Please refresh or try again later if the problem persists."))
     }

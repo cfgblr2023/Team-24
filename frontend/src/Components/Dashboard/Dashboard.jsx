@@ -66,9 +66,11 @@ function Dashboard() {
     }
   };
 
-  const fetchMissions = async () => {
+  const fetchMissions = async (missionState) => {
     await axios
-      .get("http://127.0.0.1:5000/api/get-missions")
+      .post("http://127.0.0.1:5000/api/get-missions", {
+        missionState: missionState
+      })
       .then((missionsList) => setMissions(missionsList.data))
       .catch((e) =>
         console.log(
@@ -137,7 +139,7 @@ function Dashboard() {
       })
       .then(alert("You have successfully applied for the internship."))
       .catch((e) => alert(e));
-      fetchMissions()
+      fetchMissions("ongoing")
   };
 
   const fetchInternships = async (type) => {
@@ -347,7 +349,7 @@ function Dashboard() {
                 </button>
                 <button
                   className="intern-control-btn"
-                  onClick={() => {setInternView("apply"); fetchMissions()}}
+                  onClick={() => {setInternView("apply"); fetchMissions("ongoing")}}
                 >
                   Apply for internship
                 </button>

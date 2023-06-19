@@ -46,9 +46,14 @@ app.post("/api/add-mission", async (req, res) => {
     }
 })
 
-app.get("/api/get-missions", async (req, res) => {
+app.post("/api/get-missions", async (req, res) => {
     try {
-        const missions = await Mission.find({});
+        let missions = []
+        if(req.body.missionState === "ongoing") {
+            missions = await Mission.find({status: "ongoing"});
+        } else {
+            missions = await Mission.find({});
+        }
         res.send(missions)
     } catch (e) {
         console.log(e)
@@ -85,7 +90,9 @@ app.post("/api/update-mission", async (req, res) => {
     }
 })
 
+
 // intern apis
+
 app.post("/api/apply", async (req, res) => {
     try {
         const internship = new Internship({
