@@ -127,6 +127,7 @@ function Dashboard() {
   };
 
   const applyInternship = async (e) => {
+    await fetchInternships("ongoing")
     if (internships.length === 1) {
       alert("You may only have one internship at any point of time!");
       return;
@@ -137,9 +138,8 @@ function Dashboard() {
         missionID: missions[e.target.value]._id,
         currentVacancy: missions[e.target.value].vacancy
       })
-      .then(alert("You have successfully applied for the internship."))
+      .then(async () => {await fetchInternships("ongoing");fetchMissions("ongoing");alert("You have successfully applied for the internship.")})
       .catch((e) => alert(e));
-      fetchMissions("ongoing")
   };
 
   const fetchInternships = async (type) => {
