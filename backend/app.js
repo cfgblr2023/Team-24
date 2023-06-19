@@ -94,6 +94,10 @@ app.post("/api/apply", async (req, res) => {
             status: "ongoing"
         });
         let result = await internship.save();
+        const response = await Mission.findByIdAndUpdate({"_id": req.body.missionID}, 
+            {$set: {
+                vacancy: req.body.currentVacancy - 1
+            }})
         result = result.toObject();
         if (result) {
             res.send({msg: "Internship added successfully!"});

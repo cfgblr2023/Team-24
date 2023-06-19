@@ -133,9 +133,11 @@ function Dashboard() {
       .post("http://127.0.0.1:5000/api/apply", {
         internID: currentIntern.id,
         missionID: missions[e.target.value]._id,
+        currentVacancy: missions[e.target.value].vacancy
       })
       .then(alert("You have successfully applied for the internship."))
       .catch((e) => alert(e));
+      fetchMissions()
   };
 
   const fetchInternships = async (type) => {
@@ -392,7 +394,7 @@ function Dashboard() {
                       </tr>
                       {missions.map((mission, index) => {
                         return (
-                          <tr key={index}>
+                          mission.vacancy !== 0 && <tr key={index}>
                             <td>{mission._id}</td>
                             <td>{mission.name}</td>
                             <td>{mission.about}</td>
