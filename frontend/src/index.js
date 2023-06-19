@@ -11,7 +11,7 @@ root.render(
       domain={process.env.REACT_APP_DOMAIN_ID}
       clientId={process.env.REACT_APP_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: "http://localhost:3000/login",
+        redirect_uri: "http://localhost:3000/dashboard",
       }}
     >
       <App />
