@@ -20,9 +20,9 @@ function Navbar() {
         <Link to="/missions" style={{ textDecoration: "none", color: "black" }}>
           <button className="nav-controls-btns">Missions</button>
         </Link>
-        <Link to="/dashboard" style={{ textDecoration: "none", color: "black" }}>
+        {isAuthenticated && <Link to="/dashboard" style={{ textDecoration: "none", color: "black" }}>
           <button className="nav-controls-btns">Dashboard</button>
-        </Link>
+        </Link>}
         {isAuthenticated ? <button className="nav-controls-btns" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
           Log Out
         </button>
