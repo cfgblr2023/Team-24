@@ -347,7 +347,7 @@ function Dashboard() {
                 </button>
                 <button
                   className="intern-control-btn"
-                  onClick={() => setInternView("apply")}
+                  onClick={() => {setInternView("apply"); fetchMissions()}}
                 >
                   Apply for internship
                 </button>
