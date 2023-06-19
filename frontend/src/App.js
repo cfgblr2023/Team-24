@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<h1>Homepage</h1>}></Route>
           <Route exact path="/about-us" element={<h1>About</h1>}></Route>
-          <Route exact path="/missions" element={<Missions role={role} />}></Route>
+          <Route exact path="/missions" element={<Missions />}></Route>
           <Route exact path="/login" element={<Login setRole={setRole} />}></Route>
           <Route exact path="/dashboard" element={<Dashboard role={role} />}></Route>
         </Routes>
