@@ -5,6 +5,8 @@ const internSchema = new mongoose.Schema({
     name: String,
     email: String,
     contact: String,
+    mission: String,
+    status: String
 });
 
 module.exports = Intern = mongoose.model('interns', internSchema);

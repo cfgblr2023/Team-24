@@ -12,8 +12,8 @@ function Dashboard() {
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
   const [currentIntern, setCurrentIntern] = useState({
-    id: "1001",
-    name: "Yash Seth",
+    id: "1002",
+    name: "Harsh Seth",
   });
   const [internships, setInternships] = useState([]);
   const [newMission, setNewMission] = useState({
@@ -139,8 +139,20 @@ function Dashboard() {
         missionID: missions[e.target.value]._id,
         currentVacancy: missions[e.target.value].vacancy
       })
-      .then(async () => {await fetchInternships("ongoing");fetchMissions("ongoing");alert("You have successfully applied for the internship.")})
+      .then(async () => {await fetchInternships("ongoing");await fetchMissions("ongoing");alert("You have successfully applied for the internship.")})
       .catch((e) => alert(e));
+
+      await axios.post("http://127.0.0.1:5000/api/intern-process", {
+        internID: currentIntern.id
+      })
+      .then()
+      .catch((e) => alert(e))
+
+      await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
+      internID: currentIntern.id
+    })
+    .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
+    .catch((e) => alert(e))
   };
 
   const fetchInternships = async (type) => {
@@ -167,6 +179,10 @@ function Dashboard() {
     await axios.get("http://127.0.0.1:5000/api/get-interns")
     .then((interns) => setInterns(interns.data))
     .catch((e) => console.log(e))
+  }
+
+  const acceptIntern = () => {
+    return
   }
 
   return (
@@ -355,7 +371,7 @@ function Dashboard() {
                           <td>{intern.email}</td>
                           <td>{intern.contact}</td>
                           <td>
-                            <button value={index}>Accept</button>
+                            <button value={index} onClick={() => acceptIntern()}>Accept</button>
                           </td>
                         </tr>
                       )
@@ -404,14 +420,22 @@ function Dashboard() {
                       <h4>Internship Details</h4>
                     </div>
                     <div className="current-internship-details">
-                      {internships.length === 1 ? (
+                      {internships.length === 1 && currentIntern.status === "enrolled" ? (
                         <>
                           <p>{internships[0]._id}</p>
                           <button onClick={() => completeInternship()}>
                             Complete
                           </button>
                         </>
-                      ) : (
+                      ) 
+                      : 
+                      internships.length === 1 && currentIntern.status === "applied" ? (
+                        <>
+                          <p>{internships[0]._id} is currently in review. Please check back after you receive your acceptance mail.</p>
+                        </>
+                      )
+                      :
+                      (
                         <p>Please apply for an internship first!</p>
                       )}
                     </div>

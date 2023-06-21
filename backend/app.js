@@ -153,3 +153,22 @@ app.get("/api/get-interns", async (req, res) => {
         res.send(e);
     }
 })
+
+app.post("/api/intern-process", async (req, res) => {
+    try {
+        let result = await Intern.updateOne({"ID": req.body.internID}, {$set: {"status": "applied"}})
+        console.log(result)
+        res.sendStatus(200)
+    } catch(e) {
+        res.send(e);
+    }
+})
+
+app.post("/api/current-intern-status", async (req, res) => {
+    try {
+        let response = await Intern.find({"ID": req.body.internID})
+        res.send(response)
+    } catch(e) {
+        res.send(e);
+    }
+})
