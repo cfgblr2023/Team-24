@@ -12,8 +12,9 @@ function Dashboard() {
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
   const [currentIntern, setCurrentIntern] = useState({
-    id: "1001",
-    name: "Yash Seth",
+    id: "1002",
+    name: "Harsh Seth",
+    email:"yashseth2002@gmail.com"
   });
   const [internships, setInternships] = useState([]);
   const [newMission, setNewMission] = useState({
@@ -190,7 +191,44 @@ function Dashboard() {
     })
     .then(() => alert("Intern has been accepted!"))
     .catch((e) => alert(e))
+    try {
+      await sendAcceptanceEmail()
+    } catch (err) {
+      alert(err)
+    }
     await fetchInterns()
+  }
+
+  // email code
+
+  function sendAcceptanceEmail(e) {
+    const templateId = process.env.REACT_APP_TEMPLATE_ID;
+    sendEmail(templateId, {
+      to_email: currentIntern.email,
+      to_name: currentIntern.name,
+    });
+  }
+
+  function sendEmail(templateId, variables) {
+    window.emailjs
+      .send(
+        process.env.REACT_APP_SERVICE_ID,
+        templateId,
+        variables,
+        process.env.REACT_APP_PUBLIC_KEY
+      )
+      .then((res) => {
+        // console.log("Email successfully sent!");
+        alert(
+          "Acceptance email was sent!"
+        );
+      })
+      .catch((err) =>
+        console.error(
+          "Oh well, you failed. Here some thoughts on the error that occured:",
+          err
+        )
+      );
   }
 
   return (

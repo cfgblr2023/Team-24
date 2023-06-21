@@ -166,7 +166,6 @@ app.get("/api/get-interns", async (req, res) => {
 app.post("/api/intern-process", async (req, res) => {
     try {
         let result = await Intern.updateOne({"ID": req.body.internID}, {$set: {"status": "applied"}})
-        console.log(result)
         res.sendStatus(200)
     } catch(e) {
         res.send(e);
