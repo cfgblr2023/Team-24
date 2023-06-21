@@ -90,6 +90,15 @@ app.post("/api/update-mission", async (req, res) => {
     }
 })
 
+app.post("/api/accept-intern", async (req, res) => {
+    try {
+        await Intern.updateOne({"ID": req.body.internID}, {$set: {status: "enrolled"}})
+        res.sendStatus(200)
+    } catch(e) {
+        res.send(e)
+    }
+})
+
 
 // intern apis
 

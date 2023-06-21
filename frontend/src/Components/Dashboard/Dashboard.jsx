@@ -12,8 +12,8 @@ function Dashboard() {
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
   const [currentIntern, setCurrentIntern] = useState({
-    id: "1002",
-    name: "Harsh Seth",
+    id: "1001",
+    name: "Yash Seth",
   });
   const [internships, setInternships] = useState([]);
   const [newMission, setNewMission] = useState({
@@ -30,6 +30,7 @@ function Dashboard() {
   useEffect(() => {
     fetchMissions();
     fetchInternships("ongoing");
+    getCurrentInternStatus();
   }, []);
 
   const addMission = async () => {
@@ -147,12 +148,14 @@ function Dashboard() {
       })
       .then()
       .catch((e) => alert(e))
+  };
 
-      await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
+  const getCurrentInternStatus = async () => {
+    await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
       internID: currentIntern.id
-    })
-    .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
-    .catch((e) => alert(e))
+      })
+      .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
+      .catch((e) => alert(e))
   };
 
   const fetchInternships = async (type) => {
@@ -181,8 +184,13 @@ function Dashboard() {
     .catch((e) => console.log(e))
   }
 
-  const acceptIntern = () => {
-    return
+  const acceptIntern = async () => {
+    await axios.post("http://127.0.0.1:5000/api/accept-intern", {
+      internID: currentIntern.id
+    })
+    .then(() => alert("Intern has been accepted!"))
+    .catch((e) => alert(e))
+    await fetchInterns()
   }
 
   return (
@@ -371,7 +379,7 @@ function Dashboard() {
                           <td>{intern.email}</td>
                           <td>{intern.contact}</td>
                           <td>
-                            <button value={index} onClick={() => acceptIntern()}>Accept</button>
+                            {intern.status === "applied" && <button value={index} onClick={() => acceptIntern()}>Accept</button>}
                           </td>
                         </tr>
                       )
@@ -393,13 +401,14 @@ function Dashboard() {
                   onClick={() => {
                     setInternView("current");
                     fetchInternships("ongoing");
+                    getCurrentInternStatus();
                   }}
                 >
                   Current Internship
                 </button>
                 <button
                   className="intern-control-btn"
-                  onClick={() => {setInternView("apply"); fetchMissions("ongoing")}}
+                  onClick={() => {setInternView("apply"); fetchMissions("ongoing"); getCurrentInternStatus()}}
                 >
                   Apply for internship
                 </button>
@@ -408,6 +417,7 @@ function Dashboard() {
                   onClick={() => {
                     setInternView("history");
                     fetchInternships("complete");
+                    getCurrentInternStatus();
                   }}
                 >
                   History
