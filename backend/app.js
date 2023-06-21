@@ -133,7 +133,7 @@ app.post("/api/get-internships", async (req, res) => {
 })
 
 app.post("/api/complete-internship", async (req, res) => {
-    try{
+    try {
     const response = await Internship.findByIdAndUpdate({"_id": req.body.internshipID}, 
             {$set: {
                 status: "complete",
@@ -142,5 +142,14 @@ app.post("/api/complete-internship", async (req, res) => {
     } catch(e) {
         console.log(e)
         res.send(e).status(400)
+    }
+})
+
+app.get("/api/get-interns", async (req, res) => {
+    try {
+        const interns = await Intern.find();
+        res.send(interns);
+    } catch(e) {
+        res.send(e);
     }
 })

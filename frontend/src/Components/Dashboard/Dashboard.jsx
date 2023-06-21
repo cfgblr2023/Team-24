@@ -25,6 +25,7 @@ function Dashboard() {
   });
 
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [interns, setInterns] = useState([]);
 
   useEffect(() => {
     fetchMissions();
@@ -162,6 +163,12 @@ function Dashboard() {
     fetchInternships("ongoing");
   };
 
+  const fetchInterns = async () => {
+    await axios.get("http://127.0.0.1:5000/api/get-interns")
+    .then((interns) => setInterns(interns.data))
+    .catch((e) => console.log(e))
+  }
+
   return (
     <>
       {isLoading && (
@@ -206,6 +213,7 @@ function Dashboard() {
                   onClick={() => {
                     setAdminView("interns");
                     fetchMissions();
+                    fetchInterns();
                   }}
                 >
                   Manage Interns
@@ -327,7 +335,33 @@ function Dashboard() {
                     </table>
                   </div>
                 )}
-                {adminView === "interns" && <div>Interns View</div>}
+                {adminView === "interns" && 
+                <table>
+                  <thead>
+                      <tr>
+                        <th>Intern ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Actions</th>
+                      </tr>
+                  </thead>  
+                  <tbody>
+                    {interns.map((intern, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{intern.ID}</td>
+                          <td>{intern.name}</td>
+                          <td>{intern.email}</td>
+                          <td>{intern.contact}</td>
+                          <td>
+                            <button value={index}>Accept</button>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>}
               </div>
             </>
           ) : localStorage.getItem("auth-role") === "intern" &&
