@@ -180,3 +180,19 @@ app.post("/api/current-intern-status", async (req, res) => {
         res.send(e);
     }
 })
+
+app.post("/api/login-intern", async (req, res) => {
+    try {
+        await Intern.find({"ID": req.body.ID, "pwd": req.body.pwd})
+        .then((interns) => {
+            if(interns.length !== 0) {
+                res.send({login: true})
+            } else {
+                res.send({login: false})
+            }
+        })
+    } catch(e) {
+        console.log(e)
+        res.send({login: false})
+    }
+})
