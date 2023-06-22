@@ -5,17 +5,12 @@ import "./Dashboard.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Circles } from "react-loader-spinner";
 
-function Dashboard({ isInternAuthenticated }) {
+function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
   const [adminView, setAdminView] = useState("create");
   const [internView, setInternView] = useState("current");
   const [update, setUpdate] = useState(false);
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
-  const [currentIntern, setCurrentIntern] = useState({
-    id: "1001",
-    name: "Yash Seth",
-    email:"yashseth2002@gmail.com"
-  });
   const [internships, setInternships] = useState([]);
   const [newMission, setNewMission] = useState({
     name: "",
@@ -30,8 +25,11 @@ function Dashboard({ isInternAuthenticated }) {
 
   useEffect(() => {
     fetchMissions();
-    fetchInternships("ongoing");
-    getCurrentInternStatus();
+    fetchInterns()
+    if(localStorage.getItem("auth-role") === "intern") {
+      fetchInternships("ongoing");
+      getCurrentInternStatus()
+    }
   }, []);
 
   const addMission = async () => {
@@ -137,7 +135,7 @@ function Dashboard({ isInternAuthenticated }) {
     }
     await axios
       .post("http://127.0.0.1:5000/api/apply", {
-        internID: currentIntern.id,
+        internID: currentIntern.ID,
         missionID: missions[e.target.value]._id,
         currentVacancy: missions[e.target.value].vacancy
       })
@@ -145,7 +143,7 @@ function Dashboard({ isInternAuthenticated }) {
       .catch((e) => alert(e));
 
       await axios.post("http://127.0.0.1:5000/api/intern-process", {
-        internID: currentIntern.id
+        internID: currentIntern.ID
       })
       .then()
       .catch((e) => alert(e))
@@ -153,7 +151,7 @@ function Dashboard({ isInternAuthenticated }) {
 
   const getCurrentInternStatus = async () => {
     await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
-      internID: currentIntern.id
+      internID: currentIntern.ID
       })
       .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
       .catch((e) => alert(e))
@@ -162,7 +160,7 @@ function Dashboard({ isInternAuthenticated }) {
   const fetchInternships = async (type) => {
     await axios
       .post("http://127.0.0.1:5000/api/get-internships", {
-        internID: currentIntern.id,
+        internID: currentIntern.ID,
         type: type,
       })
       .then((internships) => setInternships(internships.data))
@@ -185,14 +183,14 @@ function Dashboard({ isInternAuthenticated }) {
     .catch((e) => console.log(e))
   }
 
-  const acceptIntern = async () => {
+  const acceptIntern = async (e) => {
     await axios.post("http://127.0.0.1:5000/api/accept-intern", {
-      internID: currentIntern.id
+      internID: interns[e.target.value].ID
     })
     .then(() => alert("Intern has been accepted!"))
     .catch((e) => alert(e))
     try {
-      await sendAcceptanceEmail()
+      sendAcceptanceEmail(e.target.value)
     } catch (err) {
       alert(err)
     }
@@ -201,11 +199,11 @@ function Dashboard({ isInternAuthenticated }) {
 
   // email code
 
-  function sendAcceptanceEmail(e) {
+  function sendAcceptanceEmail(index) {
     const templateId = process.env.REACT_APP_TEMPLATE_ID;
     sendEmail(templateId, {
-      to_email: currentIntern.email,
-      to_name: currentIntern.name,
+      to_email: interns[index].email,
+      to_name: interns[index].name,
     });
   }
 
@@ -218,7 +216,6 @@ function Dashboard({ isInternAuthenticated }) {
         process.env.REACT_APP_PUBLIC_KEY
       )
       .then((res) => {
-        // console.log("Email successfully sent!");
         alert(
           "Acceptance email was sent!"
         );
@@ -417,7 +414,7 @@ function Dashboard({ isInternAuthenticated }) {
                           <td>{intern.email}</td>
                           <td>{intern.contact}</td>
                           <td>
-                            {intern.status === "applied" && <button value={index} onClick={() => acceptIntern()}>Accept</button>}
+                            {intern.status === "applied" && <button value={index} onClick={(e) => acceptIntern(e)}>Accept</button>}
                           </td>
                         </tr>
                       )

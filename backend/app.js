@@ -158,6 +158,7 @@ app.get("/api/get-interns", async (req, res) => {
     try {
         const interns = await Intern.find();
         res.send(interns);
+        console.log(interns)
     } catch(e) {
         res.send(e);
     }
@@ -173,6 +174,15 @@ app.post("/api/intern-process", async (req, res) => {
 })
 
 app.post("/api/current-intern-status", async (req, res) => {
+    try {
+        let response = await Intern.find({"ID": req.body.internID})
+        res.send(response)
+    } catch(e) {
+        res.send(e);
+    }
+})
+
+app.post("/api/current-intern-details", async (req, res) => {
     try {
         let response = await Intern.find({"ID": req.body.internID})
         res.send(response)
