@@ -5,17 +5,12 @@ import "./Dashboard.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Circles } from "react-loader-spinner";
 
-function Dashboard({ isInternAuthenticated }) {
+function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
   const [adminView, setAdminView] = useState("create");
   const [internView, setInternView] = useState("current");
   const [update, setUpdate] = useState(false);
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
-  const [currentIntern, setCurrentIntern] = useState({
-    id: "1001",
-    name: "Yash Seth",
-    email:"yashseth2002@gmail.com"
-  });
   const [internships, setInternships] = useState([]);
   const [newMission, setNewMission] = useState({
     name: "",
@@ -31,7 +26,7 @@ function Dashboard({ isInternAuthenticated }) {
   useEffect(() => {
     fetchMissions();
     fetchInternships("ongoing");
-    getCurrentInternStatus();
+    getCurrentInternStatus()
   }, []);
 
   const addMission = async () => {
@@ -137,7 +132,7 @@ function Dashboard({ isInternAuthenticated }) {
     }
     await axios
       .post("http://127.0.0.1:5000/api/apply", {
-        internID: currentIntern.id,
+        internID: currentIntern.ID,
         missionID: missions[e.target.value]._id,
         currentVacancy: missions[e.target.value].vacancy
       })
@@ -145,7 +140,7 @@ function Dashboard({ isInternAuthenticated }) {
       .catch((e) => alert(e));
 
       await axios.post("http://127.0.0.1:5000/api/intern-process", {
-        internID: currentIntern.id
+        internID: currentIntern.ID
       })
       .then()
       .catch((e) => alert(e))
@@ -153,7 +148,7 @@ function Dashboard({ isInternAuthenticated }) {
 
   const getCurrentInternStatus = async () => {
     await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
-      internID: currentIntern.id
+      internID: currentIntern.ID
       })
       .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
       .catch((e) => alert(e))
@@ -162,7 +157,7 @@ function Dashboard({ isInternAuthenticated }) {
   const fetchInternships = async (type) => {
     await axios
       .post("http://127.0.0.1:5000/api/get-internships", {
-        internID: currentIntern.id,
+        internID: currentIntern.ID,
         type: type,
       })
       .then((internships) => setInternships(internships.data))
@@ -187,7 +182,7 @@ function Dashboard({ isInternAuthenticated }) {
 
   const acceptIntern = async () => {
     await axios.post("http://127.0.0.1:5000/api/accept-intern", {
-      internID: currentIntern.id
+      internID: currentIntern.ID
     })
     .then(() => alert("Intern has been accepted!"))
     .catch((e) => alert(e))

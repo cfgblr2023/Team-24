@@ -7,8 +7,8 @@ import { useState } from "react"
 import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
-  const [role, setRole] = useState("user")
   const [isInternAuthenticated, setIsInternAuthenticated] = useState(false)
+  const [currentIntern, setCurrentIntern] = useState({});
   return (
     <Router>
       <Navbar isInternAuthenticated={isInternAuthenticated} setIsInternAuthenticated={setIsInternAuthenticated}/>
@@ -17,8 +17,8 @@ function App() {
           <Route exact path="/" element={<h1>Homepage</h1>}></Route>
           <Route exact path="/about-us" element={<h1>About</h1>}></Route>
           <Route exact path="/missions" element={<Missions />}></Route>
-          <Route exact path="/login" element={<Login setIsInternAuthenticated={setIsInternAuthenticated} />}></Route>
-          <Route exact path="/dashboard" element={<Dashboard isInternAuthenticated={isInternAuthenticated} />}></Route>
+          <Route exact path="/login" element={<Login setIsInternAuthenticated={setIsInternAuthenticated} setCurrentIntern={setCurrentIntern} />}></Route>
+          <Route exact path="/dashboard" element={<Dashboard isInternAuthenticated={isInternAuthenticated} currentIntern={currentIntern} setCurrentIntern={setCurrentIntern} />}></Route>
         </Routes>
       </div>
     </Router>
