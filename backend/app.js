@@ -181,6 +181,16 @@ app.post("/api/current-intern-status", async (req, res) => {
     }
 })
 
+app.post("/api/current-intern-details", async (req, res) => {
+    try {
+        let response = await Intern.find({"ID": req.body.internID})
+        res.send(response)
+        console.log(response)
+    } catch(e) {
+        res.send(e);
+    }
+})
+
 app.post("/api/login-intern", async (req, res) => {
     try {
         await Intern.find({"ID": req.body.ID, "pwd": req.body.pwd})
