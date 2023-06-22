@@ -8,16 +8,17 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   const [role, setRole] = useState("user")
+  const [isInternAuthenticated, setIsInternAuthenticated] = useState(false)
   return (
     <Router>
-      <Navbar />
+      <Navbar isInternAuthenticated={isInternAuthenticated} setIsInternAuthenticated={setIsInternAuthenticated}/>
       <div>
         <Routes>
           <Route exact path="/" element={<h1>Homepage</h1>}></Route>
           <Route exact path="/about-us" element={<h1>About</h1>}></Route>
           <Route exact path="/missions" element={<Missions />}></Route>
-          <Route exact path="/login" element={<Login setRole={setRole} />}></Route>
-          <Route exact path="/dashboard" element={<Dashboard role={role} />}></Route>
+          <Route exact path="/login" element={<Login setIsInternAuthenticated={setIsInternAuthenticated} />}></Route>
+          <Route exact path="/dashboard" element={<Dashboard isInternAuthenticated={isInternAuthenticated} />}></Route>
         </Routes>
       </div>
     </Router>

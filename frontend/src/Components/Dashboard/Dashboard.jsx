@@ -5,15 +5,15 @@ import "./Dashboard.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Circles } from "react-loader-spinner";
 
-function Dashboard() {
+function Dashboard({ isInternAuthenticated }) {
   const [adminView, setAdminView] = useState("create");
   const [internView, setInternView] = useState("current");
   const [update, setUpdate] = useState(false);
   const [currentMission, setCurrentMission] = useState({});
   const [missions, setMissions] = useState([]);
   const [currentIntern, setCurrentIntern] = useState({
-    id: "1002",
-    name: "Harsh Seth",
+    id: "1001",
+    name: "Yash Seth",
     email:"yashseth2002@gmail.com"
   });
   const [internships, setInternships] = useState([]);
@@ -427,7 +427,7 @@ function Dashboard() {
               </div>
             </>
           ) : localStorage.getItem("auth-role") === "intern" &&
-            isAuthenticated ? (
+            isInternAuthenticated ? (
             <div className="intern-main">
               <div className="intern-header">
                 <h2>Dashboard</h2>
