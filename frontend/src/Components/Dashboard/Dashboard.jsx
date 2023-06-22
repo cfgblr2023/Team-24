@@ -20,7 +20,7 @@ function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
     status: "ongoing",
   });
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const {isAuthenticated, isLoading } = useAuth0();
   const [interns, setInterns] = useState([]);
 
   useEffect(() => {
@@ -136,7 +136,6 @@ function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
     await axios
       .post("http://127.0.0.1:5000/api/apply", {
         internID: currentIntern.ID,
-        internID: currentIntern.ID,
         missionID: missions[e.target.value]._id,
         currentVacancy: missions[e.target.value].vacancy
       })
@@ -144,7 +143,6 @@ function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
       .catch((e) => alert(e));
 
       await axios.post("http://127.0.0.1:5000/api/intern-process", {
-        internID: currentIntern.ID
         internID: currentIntern.ID
       })
       .then()
@@ -154,7 +152,6 @@ function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
   const getCurrentInternStatus = async () => {
     await axios.post("http://127.0.0.1:5000/api/current-intern-status", {
       internID: currentIntern.ID
-      internID: currentIntern.ID
       })
       .then((status) => setCurrentIntern({...currentIntern, "status": status.data[0].status}))
       .catch((e) => alert(e))
@@ -163,7 +160,6 @@ function Dashboard({ isInternAuthenticated, currentIntern, setCurrentIntern }) {
   const fetchInternships = async (type) => {
     await axios
       .post("http://127.0.0.1:5000/api/get-internships", {
-        internID: currentIntern.ID,
         internID: currentIntern.ID,
         type: type,
       })
