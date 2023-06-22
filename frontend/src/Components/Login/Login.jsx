@@ -36,8 +36,22 @@ function Login({ setIsInternAuthenticated }) {
 
   const registerIntern = async () => {
     await axios.post("http://127.0.0.1:5000/api/register-intern", internData)
-    .then()
+    .then((res) => {
+      if(res.data.register) {
+        alert("Registration Successful! Proceed to login.")
+        setInternState("existing")
+      } else {
+        alert("Please try to register again, there was an issue.")
+      }
+    })
     .catch((e) => alert(e))
+    setInternData({
+      "ID": "",
+      "pwd": "",
+      "name": "",
+      "email": "",
+      "contact": "",
+    })
   }
 
   const loginIntern = async () => {
@@ -98,7 +112,7 @@ function Login({ setIsInternAuthenticated }) {
                 <input id="contact" value={internData.contact} onChange={(e) => handleInternForm(e, "contact")}></input>
                 <label for="password">Password</label>
                 <input id="password" value={internData.pwd} onChange={(e) => handleInternForm(e, "pwd")}></input>
-                <button>Register</button>
+                <button onClick={() => {registerIntern();}}>Register</button>
               </>}
             </div>
             </>}
