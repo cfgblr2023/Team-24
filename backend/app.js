@@ -196,3 +196,19 @@ app.post("/api/login-intern", async (req, res) => {
         res.send({login: false})
     }
 })
+
+app.post("/api/register-intern", async (req, res) => {
+    try {
+        const intern = new Intern(req.body);
+        let result = await intern.save();
+        result = result.toObject();
+        if (result) {
+            res.send({register: true});
+        } else {
+            res.send({register: false})
+        }
+    } catch (e) {
+        console.log(e)
+        res.send({register: false});
+    }
+})
