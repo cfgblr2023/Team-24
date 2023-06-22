@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
 function Login({ setIsInternAuthenticated, setCurrentIntern }) {
+function Login({ setIsInternAuthenticated, setCurrentIntern }) {
   const [loginView, setLoginView] = useState("admin");
   const [internData, setInternData] = useState({
       "ID": "",
