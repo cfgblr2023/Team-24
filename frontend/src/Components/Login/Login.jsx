@@ -3,6 +3,7 @@ import { useState } from 'react'
 import "./Login.css"
 import axios from "axios"
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from 'react-router-dom';
 
 function Login({ setIsInternAuthenticated, setCurrentIntern }) {
   const [loginView, setLoginView] = useState("admin");
@@ -16,6 +17,8 @@ function Login({ setIsInternAuthenticated, setCurrentIntern }) {
     })
     const [internState, setInternState] = useState("existing")
     const { loginWithRedirect } = useAuth0();
+    const navigate = useNavigate();
+
     const handleLogin = async (role) => {
       localStorage.setItem( 'auth-role', role );
       loginWithRedirect()
@@ -69,7 +72,7 @@ function Login({ setIsInternAuthenticated, setCurrentIntern }) {
           await axios.post("http://127.0.0.1:5000/api/current-intern-details", {
             internID: internData.ID
           })
-          .then(async (details) => {await setCurrentIntern({...details.data[0]}); alert("Login successful")})
+          .then(async (details) => {await setCurrentIntern({...details.data[0]}); alert("Login successful"); navigate('/dashboard')})
           .catch((e) => alert(e))
         }
       })
