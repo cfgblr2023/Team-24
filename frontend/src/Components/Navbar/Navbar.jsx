@@ -8,7 +8,7 @@ function Navbar({ isInternAuthenticated, setIsInternAuthenticated }) {
   return (
     <div className="navbar-main">
       <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-        <div className="navbar-header">Marpu Foundation</div>
+        <div className="navbar-header">XYZ Foundation</div>
       </Link>
       <div className="navbar-controls">
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
