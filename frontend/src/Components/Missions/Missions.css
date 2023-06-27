@@ -70,3 +70,10 @@
     border-radius: 20px;
     width: 80%;
 }
+
+.toggle-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
