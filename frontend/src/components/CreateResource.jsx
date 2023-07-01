@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from "react";
 import axios from 'axios'
 import { useState } from 'react'
@@ -17,11 +18,11 @@ const CreateResource = () => {
     <>
     <div id="cr_index" className="mx-2">
         <div className="container-fluid bg-success my-2 p-3 d-flex justify-content-center border rounded-3"> <h1>Create a resource</h1> </div>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" encType="multipart/form-data">
      <table>
             <tr >
                 <td>
-                    <label for="name">
+                    <label htmlFor="name">
                         Volunteer Name
                     </label>
                 </td>
@@ -29,7 +30,7 @@ const CreateResource = () => {
                 </td>
             </tr>
             <tr >
-                <td><label for="email">
+                <td><label htmlFor="email">
                         Email
                     </label>
                 </td>
@@ -38,7 +39,7 @@ const CreateResource = () => {
             </tr>
             <tr >
                 <td>
-                    <label for="tut_title">
+                    <label htmlFor="tut_title">
                         Title of Tutorial
                     </label>
                 </td>
@@ -47,7 +48,7 @@ const CreateResource = () => {
             </tr>
             <tr >
                 <td>
-                    <label for="tut_desc">
+                    <label htmlFor="tut_desc">
                         Desc. of Video
                     </label>
                 </td>

@@ -1,24 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Speech from "./Speech/Speech";
 
 const Navbar = () => {
-  const Navigate=useNavigate();
-  
+  const Navigate = useNavigate();
 
-  const handleChats=()=>{
-    Navigate('/authentication')
-   
-  }
-  const handleSpeech=()=>{
-    return(<Speech/>)
-    
+  const handleChats = () => {
+    Navigate("/authentication");
+  };
+  const handleSpeech = () => {
+    Navigate("/speech");
+  };
+  const handleAdmin=()=>{
+    Navigate('/admin')
   }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary ">
       <div className="container ">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/home">
           <h1> Lamp Lighters</h1>
         </a>
         <button
@@ -56,25 +55,31 @@ const Navbar = () => {
               </button>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <a className="nav-link active" aria-current="page" href="/home">
                 <h1>Home</h1>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/about">
                 <h1>About</h1>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                <h1>FundRaiser</h1>
+              <a className="nav-link" href="/contact">
+                <h1>Contact</h1>
               </a>
             </li>
-            
-            <select className="border-0" style={{"background":"transparent",border:0}}>
-              <option style={{"background":"transparent",border:0}} > Login</option>
+
+            <select
+              className="border-0"
+              style={{ background: "transparent", border: 0 }}
+            >
+              <option style={{ background: "transparent", border: 0 }}>
+                {" "}
+                Login
+              </option>
               <option>Volunteer</option>
-              <option>Admin</option>
+              <option><button onClick={handleAdmin}>Admin</button></option>
               <option>Student</option>
             </select>
             {/* <li className="nav-item dropdown d-flex align-items-center">
