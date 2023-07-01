@@ -56,6 +56,18 @@ app.post("/api/add-offline-class", async (req, res) => {
     }
 })
 
+
+app.get("/api/get-offline-classes", async (req, res) => {
+    try {
+        let classes = []
+        classes = await OfflineClass.find({});
+        res.send(classes)
+        } catch (e) {
+            console.log(e)
+            res.send("Something Went Wrong. Please try again. " + e);
+        }
+})
+
 app.post("/api/add-file", async (req, res) => {
     try {
         const video = new Video(req.body);
@@ -73,13 +85,13 @@ app.post("/api/add-file", async (req, res) => {
 
 app.get("/api/get-files", async (req, res) => {
     try {
-                let files = []
-                files = await Video.find({});
-                res.send(files)
-            } catch (e) {
-                console.log(e)
-                res.send("Something Went Wrong. Please try again. " + e);
-            }
+        let files = []
+        files = await Video.find({});
+        res.send(files)
+        } catch (e) {
+            console.log(e)
+            res.send("Something Went Wrong. Please try again. " + e);
+        }
 })
 
 // app.post("/api/get-missions", async (req, res) => {
