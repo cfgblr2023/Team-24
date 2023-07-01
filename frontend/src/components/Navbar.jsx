@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Speech from "./Speech/Speech";
 
 const Navbar = () => {
   const Navigate=useNavigate();
@@ -9,6 +10,10 @@ const Navbar = () => {
   const handleChats=()=>{
     Navigate('/authentication')
    
+  }
+  const handleSpeech=()=>{
+    return(<Speech/>)
+    
   }
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary ">
@@ -39,6 +44,15 @@ const Navbar = () => {
                 onClick={handleChats}
               >
                 Chats
+              </button>
+            </li>
+            <li className="nav-item  d-flex align-items-center">
+              <button
+                type="button"
+                className="btn btn-success "
+                onClick={handleSpeech}
+              >
+                MIC
               </button>
             </li>
             <li className="nav-item">

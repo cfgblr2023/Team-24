@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Speech from "./components/Speech/Speech";
+import "./components/Navbar.css";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Authentication from "./Components/ChatApplication/Authentication"
@@ -8,6 +10,9 @@ import FundRaiser from "./Components/FundRaiser";
 import About from "./Components/About";
 import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
+
+
+
 
 function App() {
   return (
@@ -18,6 +23,7 @@ function App() {
           <Route path="/authentication" element={<Authentication />} />
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/fund" element={<FundRaiser />} />
+          <Route path="/speech" element={<Speech />} />
 
           
           {/* endpoints about and createResource created */}

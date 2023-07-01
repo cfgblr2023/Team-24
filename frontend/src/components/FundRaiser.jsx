@@ -2,12 +2,11 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import "./FundRaiser.css";
 const FundRaiser = () => {
   const Navigate = useNavigate();
   const [name, setName] = useState("");
   const [money, setMoney] = useState("");
-
- 
 
   const handlePay = (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const FundRaiser = () => {
         key_secret: "",
         amount: money * 100,
         currency: "INR",
-        name: "LAGBAY",
+        name: name,
         description: "for testing purpose",
         handler: function (response) {
           alert(response.razorpay_payment_id);
@@ -43,33 +42,42 @@ const FundRaiser = () => {
     }
   };
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <form onSubmit={handlePay}>
-            <label htmlFor="name">
+    <section className="fundpic">
+      <div className="container vh-100 d-flex justify-content-center align-items-center">
+        <div className="row ">
+          <h1 style={{color:"white"}}>Fund Raiser</h1>
+          <div className="col mt-5">
+            <div className="form-floating mb-3" >
               <input
-                type="text"
-                placeholder="name"
+                type="email"
+                className="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
               />
-            </label>
-            <label htmlFor="Money">
+              <label htmlFor="floatingInput"> Name</label>
+            </div>
+            <div className="form-floating">
               <input
-                type="text"
-                placeholder="Money"
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password"
                 onChange={(e) => {
                   setMoney(e.target.value);
                 }}
               />
-            </label>
-            <button>DOnate</button>
-          </form>
+              <label htmlFor="floatingPassword">Money</label>
+            </div>
+            <div className="mt-5">
+            <button type="button" className="btn btn-success " onClick={handlePay}>Success</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
