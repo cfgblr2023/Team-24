@@ -20,7 +20,7 @@ const About = () => {
      <table>
             <tr >
                 <td>
-                    <label for="name">
+                    <label htmlFor="name">
                         Volunteer Name
                     </label>
                 </td>
@@ -28,7 +28,7 @@ const About = () => {
                 </td>
             </tr>
             <tr >
-                <td><label for="email">
+                <td><label htmlFor="email">
                         Email
                     </label>
                 </td>
@@ -36,7 +36,7 @@ const About = () => {
                 </td>
             </tr>
             <tr >
-                <td><label for="file">
+                <td><label htmlFor="file">
                         Upload the recording
                     </label>
                 </td>
@@ -44,9 +44,9 @@ const About = () => {
                     <tr>
                     <input id="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*"/>
                     </tr>
-                    <tr>
+                    {/* <tr>
                 <video id="up_video"></video>
-                    </tr>
+                    </tr> */}
                 </td>
             </tr>
             <tr >
