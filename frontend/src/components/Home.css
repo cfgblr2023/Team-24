@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Comforter&family=Poppins&family=Tilt+Prism&display=swap");
+
+.title {
+  font-family: "Comforter", cursive;
+}
+
+.title-1 {
+  font-family: "Comforter", cursive;
+}
+
+.pic {
+  background-image: url("https://images.unsplash.com/photo-1594708767771-a7502209ff51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.main {
+  font-family: "Tilt Prism", cursive;
+}
+
+.para {
+  font-family: "Comforter", cursive;
+  color: black;
+}
+
+.para1 {
+  font-family: "Poppins", sans-serif;
+  color: black;
+}

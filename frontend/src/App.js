@@ -1,29 +1,32 @@
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
-import Login from "./Components/Login/Login";
-import Missions from "./Components/Missions/Missions";
-import { useState } from "react"
-import Dashboard from "./Components/Dashboard/Dashboard";
-import About from "./Components/About/About";
+
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import Authentication from "./components/ChatApplication/Authentication"
+import ChatsPage from "./components/ChatApplication/ChatsPage"
+import FundRaiser from "./components/FundRaiser";
+import About from "./components/About";
+import CreateResource from "./components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
 
 function App() {
-  const [isInternAuthenticated, setIsInternAuthenticated] = useState(false)
-  const [currentIntern, setCurrentIntern] = useState({});
   return (
     <Router>
-      <Navbar isInternAuthenticated={isInternAuthenticated} setIsInternAuthenticated={setIsInternAuthenticated}/>
-      <div>
+        <Navbar/>
         <Routes>
-          <Route exact path="/" element={<h1>Homepage</h1>}></Route>
-          <Route exact path="/about-us" element={<About />}></Route>
-          <Route exact path="/missions" element={<Missions />}></Route>
-          <Route exact path="/login" element={<Login setIsInternAuthenticated={setIsInternAuthenticated} setCurrentIntern={setCurrentIntern} />}></Route>
-          <Route exact path="/dashboard" element={<Dashboard isInternAuthenticated={isInternAuthenticated} currentIntern={currentIntern} setCurrentIntern={setCurrentIntern} />}></Route>
+          <Route path="/home" element={<Home />} />
+          <Route path="/authentication" element={<Authentication />} />
+          <Route path="/chats" element={<ChatsPage />} />
+          <Route path="/fund" element={<FundRaiser />} />
+
+          
+          {/* endpoints about and createResource created */}
+          <Route path="/about" element={<About />} />
+          {/* check authentication authenticated user can fill this form */}
+          <Route path="/createResource" element={<CreateResource />} />
           <Route exact path="/learning-portal" element={<LearningPortal />}></Route>
         </Routes>
-      </div>
+      
     </Router>
   );
 }
