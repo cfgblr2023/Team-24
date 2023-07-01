@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Speech from "./components/Speech/Speech";
-import "./components/Navbar.css";
+import Speech from "./Components/Speech/Speech";
+import "./Components/Navbar.css";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Authentication from "./Components/ChatApplication/Authentication"
