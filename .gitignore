@@ -1,0 +1,3 @@
+backend/models/internships.js
+/backend/node_modules
+/backend/.env
