@@ -1,0 +1,12 @@
+{
+    "eslint.workingDirectories": [
+        "Dir1",
+        "Dir2"
+    ],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ]
+}
