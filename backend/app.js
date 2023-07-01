@@ -58,18 +58,28 @@ app.post("/api/add-offline-class", async (req, res) => {
 
 app.post("/api/add-file", async (req, res) => {
     try {
-        console.log(req.body.name)
         const video = new Video(req.body);
         let result = await video.save();
         result = result.toObject();
         if (result) {
-            res.send({msg: "Class added successfully!"});
+            res.send({msg: "Video added successfully!"});
         } else {
-            res.send({msg: "There was an error trying to add the class, please try again."})
+            res.send({msg: "There was an error trying to add the video, please try again."})
         }
     } catch (e) {
         res.send("Something Went Wrong. Please try again. " + e);
     }
+})
+
+app.get("/api/get-files", async (req, res) => {
+    try {
+                let files = []
+                files = await Video.find({});
+                res.send(files)
+            } catch (e) {
+                console.log(e)
+                res.send("Something Went Wrong. Please try again. " + e);
+            }
 })
 
 // app.post("/api/get-missions", async (req, res) => {

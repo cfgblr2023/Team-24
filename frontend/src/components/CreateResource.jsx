@@ -4,13 +4,28 @@ import axios from 'axios'
 import { useState } from 'react'
 
 const CreateResource = () => {
-    const [file, setFile] = useState("")
+    const [fileName, setFileName] = useState("")
+    const [fileDesc, setFileDesc] = useState("")
+    const [fileURL, setFileURL] = useState("")
 
-    const handleFormChange = (e) => {
-        setFile(e.target.value)
+    const handleFormNameChange = (e) => {
+        console.log(e.target.value)
+        setFileName(e.target.value)
     }
-    const uploadFile = async () => {
-        await axios.post("http://127.0.0.1:6000/api/add-file", JSON.stringify({"url": file}))
+
+    const handleFormDescChange = (e) => {
+        setFileDesc(e.target.value)
+    }
+
+    const handleFormURLChange = (e) => {
+        setFileURL(e.target.value)
+    }
+    const uploadFile = async (e) => {
+        e.preventDefault()
+        await axios.post("http://127.0.0.1:8000/api/add-file", {
+            url: fileURL,
+            name: fileName,
+            desc: fileDesc})
         .then(() => alert("File was uploaded"))
         .catch(() => alert("There was an error, please try again!"))
     }
@@ -43,7 +58,7 @@ const CreateResource = () => {
                         Title of Tutorial
                     </label>
                 </td>
-                <td><input type="text" id="tut_title" name ="tut_title" required placeholder="Title "/>
+                <td><input type="text" id="tut_title" value={fileName} name ="tut_title" required placeholder="Title " onChange={handleFormNameChange}/>
                 </td>
             </tr>
             <tr >
@@ -52,7 +67,7 @@ const CreateResource = () => {
                         Desc. of Video
                     </label>
                 </td>
-                <td><input type="text" id="tut_desc"  name="tut_desc" required placeholder="Description "/>
+                <td><input type="text" id="tut_desc"  value={fileDesc} name="tut_desc" required placeholder="Description " onChange={handleFormDescChange}/>
                 </td>
             </tr>
             <tr >
@@ -62,7 +77,7 @@ const CreateResource = () => {
                 </td>
                 <td>
                     <tr>
-                    <input id="url" type="url" value={file} onChange={handleFormChange}/>
+                    <input id="url" type="url" value={fileURL} onChange={handleFormURLChange}/>
                     </tr>
                     <tr>
                 <video id="up_video" style={{height: "180px", width: "320px"}}></video>
@@ -70,7 +85,7 @@ const CreateResource = () => {
                 </td>
             </tr>
             <tr >
-                <button className="btn btn-primary" onClick={() => uploadFile()}> Create</button>
+                <button className="btn btn-primary" onClick={(e) => uploadFile(e)}> Create</button>
             </tr>
     </table>
 
