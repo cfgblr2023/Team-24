@@ -5,8 +5,13 @@ import Navbar from "./components/Navbar";
 import Authentication from "./components/ChatApplication/Authentication"
 import ChatsPage from "./components/ChatApplication/ChatsPage"
 import FundRaiser from "./components/FundRaiser";
+
 import Speech from "./components/Speech/Speech";
 import "./components/Navbar.css"
+
+
+import About from "./components/About";
+import CreateResource from "./components/CreateResource";
 
 
 function App() {
@@ -21,6 +26,10 @@ function App() {
           <Route path="/speech" element={<Speech />} />
 
           
+          {/* endpoints about and createResource created */}
+          <Route path="/about" element={<About />} />
+          {/* check authentication authenticated user can fill this form */}
+          <Route path="/createResource" element={<CreateResource />} />
         </Routes>
       
     </Router>
