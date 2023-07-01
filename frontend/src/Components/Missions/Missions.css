@@ -1,0 +1,79 @@
+.missions-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.add-mission-form {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#mission-name, #mission-about, #mission-type, #mission-vacancy {
+    border-radius: 10px;
+    margin: 10px;
+} 
+
+#add-mission {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#add-mission:hover,
+#add-mission:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+#add-mission:active {
+  background: var(--color);
+  color: #fff;
+}
+
+.missions-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.mission, .search-card  {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 80%;
+}
+
+.toggle-switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
