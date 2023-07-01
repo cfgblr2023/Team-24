@@ -1,0 +1,14 @@
+.video-responsive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 20px;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+  }
