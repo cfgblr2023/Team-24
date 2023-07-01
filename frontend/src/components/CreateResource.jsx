@@ -1,7 +1,6 @@
 import React from "react";
 
-const About = () => {
-    
+const CreateResource = () => {
     React.useEffect(() => {
         const inputFile = document.getElementById("file");
         const video = document.getElementById("up_video");
@@ -9,6 +8,7 @@ const About = () => {
         inputFile.addEventListener("change", function(){
             const file = inputFile.files[0];
             const videourl = URL.createObjectURL(file);
+            console.log(videourl);
             video.setAttribute("src", videourl);
         })
     });
@@ -16,11 +16,11 @@ const About = () => {
     <>
     <div id="cr_index" className="mx-2">
         <div className="container-fluid bg-success my-2 p-3 d-flex justify-content-center border rounded-3"> <h1>Create a resource</h1> </div>
-    <form>
+    <form method="post" enctype="multipart/form-data">
      <table>
             <tr >
                 <td>
-                    <label htmlFor="name">
+                    <label for="name">
                         Volunteer Name
                     </label>
                 </td>
@@ -28,7 +28,7 @@ const About = () => {
                 </td>
             </tr>
             <tr >
-                <td><label htmlFor="email">
+                <td><label for="email">
                         Email
                     </label>
                 </td>
@@ -36,7 +36,25 @@ const About = () => {
                 </td>
             </tr>
             <tr >
-                <td><label htmlFor="file">
+                <td>
+                    <label for="tut_title">
+                        Title of Tutorial
+                    </label>
+                </td>
+                <td><input type="text" id="tut_title" name ="tut_title" required placeholder="Title "/>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                    <label for="tut_desc">
+                        Desc. of Video
+                    </label>
+                </td>
+                <td><input type="text" id="tut_desc"  name="tut_desc" required placeholder="Description "/>
+                </td>
+            </tr>
+            <tr >
+                <td><label for="file">
                         Upload the recording
                     </label>
                 </td>
@@ -44,9 +62,9 @@ const About = () => {
                     <tr>
                     <input id="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*"/>
                     </tr>
-                    {/* <tr>
+                    <tr>
                 <video id="up_video"></video>
-                    </tr> */}
+                    </tr>
                 </td>
             </tr>
             <tr >
@@ -60,4 +78,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default CreateResource;
