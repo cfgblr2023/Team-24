@@ -1,17 +1,18 @@
 import React from "react";
+import axios from 'axios'
+import { useState } from 'react'
 
 const CreateResource = () => {
-    React.useEffect(() => {
-        const inputFile = document.getElementById("file");
-        const video = document.getElementById("up_video");
+    const [file, setFile] = useState("")
 
-        inputFile.addEventListener("change", function(){
-            const file = inputFile.files[0];
-            const videourl = URL.createObjectURL(file);
-            console.log(videourl);
-            video.setAttribute("src", videourl);
-        })
-    });
+    const handleFormChange = (e) => {
+        setFile(e.target.value)
+    }
+    const uploadFile = async () => {
+        await axios.post("http://127.0.0.1:6000/api/add-file", JSON.stringify({"url": file}))
+        .then(() => alert("File was uploaded"))
+        .catch(() => alert("There was an error, please try again!"))
+    }
   return (
     <>
     <div id="cr_index" className="mx-2">
@@ -24,7 +25,7 @@ const CreateResource = () => {
                         Volunteer Name
                     </label>
                 </td>
-                <td><input disabled="true" type="text" id="name" required value="Name from backend "/>
+                <td><input disabled="true" type="text" id="name" required value="Name from backend"/>
                 </td>
             </tr>
             <tr >
@@ -54,21 +55,21 @@ const CreateResource = () => {
                 </td>
             </tr>
             <tr >
-                <td><label for="file">
+                <td><label for="url">
                         Upload the recording
                     </label>
                 </td>
                 <td>
                     <tr>
-                    <input id="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*"/>
+                    <input id="url" type="url" value={file} onChange={handleFormChange}/>
                     </tr>
                     <tr>
-                <video id="up_video"></video>
+                <video id="up_video" style={{height: "180px", width: "320px"}}></video>
                     </tr>
                 </td>
             </tr>
             <tr >
-                <button className="btn btn-primary"> Create</button>
+                <button className="btn btn-primary" onClick={() => uploadFile()}> Create</button>
             </tr>
     </table>
 
