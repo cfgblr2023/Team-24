@@ -71,6 +71,17 @@ app.post("/api/add-file", async (req, res) => {
     }
 })
 
+app.get("/api/get-files", async (req, res) => {
+    try {
+                let files = []
+                files = await Video.find({});
+                res.send(files)
+            } catch (e) {
+                console.log(e)
+                res.send("Something Went Wrong. Please try again. " + e);
+            }
+})
+
 // app.post("/api/get-missions", async (req, res) => {
 //     try {
 //         let missions = []
