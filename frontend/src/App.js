@@ -9,6 +9,8 @@ import FundRaiser from "./Components/FundRaiser";
 import About from "./Components/About";
 import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
+import Contact from "./Components/Contact";
+import Volunteer_offline from "./Components/Volunteer_offline";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/fund" element={<FundRaiser />} />
           <Route path="/speech" element={<Speech />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/offline" element={<Volunteer_offline />} />
 
           
           {/* endpoints about and createResource created */}
