@@ -6,6 +6,7 @@ import Missions from "./Components/Missions/Missions";
 import { useState } from "react"
 import Dashboard from "./Components/Dashboard/Dashboard";
 import About from "./Components/About/About";
+import LearningPortal from "./Components/LearningPortal/LearningPortal";
 
 function App() {
   const [isInternAuthenticated, setIsInternAuthenticated] = useState(false)
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/missions" element={<Missions />}></Route>
           <Route exact path="/login" element={<Login setIsInternAuthenticated={setIsInternAuthenticated} setCurrentIntern={setCurrentIntern} />}></Route>
           <Route exact path="/dashboard" element={<Dashboard isInternAuthenticated={isInternAuthenticated} currentIntern={currentIntern} setCurrentIntern={setCurrentIntern} />}></Route>
+          <Route exact path="/learning-portal" element={<LearningPortal />}></Route>
         </Routes>
       </div>
     </Router>
