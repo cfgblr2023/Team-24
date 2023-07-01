@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import "./LearningPortal.css";
 import VideoRoom from "../VideoRoom/VideoRoom";
+import axios from "axios"
 
 function LearningPortal() {
   const [currentView, setCurrentView] = useState("student");
   const [joined, setJoined] = useState(false);
   const [currentStudentView, setCurrentStudentView] = useState("list");
+  const [courses, setCourses] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     name: "Yash Seth",
     id: "1001",
@@ -18,6 +20,33 @@ function LearningPortal() {
     { courseName: "ijk", courseID: "125" },
     { courseName: "pqr", courseID: "126" },
   ];
+
+//   const handleSubmit = async (e) => {
+//     // e.preventDefault();
+//     await axios.post("http://127.0.0.1:8000/api/add-offline-class", {
+//       name: name,
+//       email: email,
+//       contact: number,
+//       location: location,
+//       course: course,
+//       date: date
+//   })
+//     .then((res) => {console.log(res.data) ;alert("File was uploaded")})
+//     .catch((err) => console.log(err))
+// }
+
+  const fetchFiles = async (e) => {
+    // e.preventDefault();
+    await axios.get("http://127.0.0.1:8000/api/get-files")
+    .then((courses) => {console.log(courses.data);setCourses(courses.data)})
+    .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    console.log("I was here")
+    fetchFiles()
+  }, [])
+  
 
   const [currentCourse, setCurrentCourse] = useState();
 
@@ -41,16 +70,16 @@ function LearningPortal() {
           <div className="course-list">
             {currentStudentView === "list" && (
               <>
-                {data.map((course, index) => {
+                {courses.map((course, index) => {
                   return (
                     <div className="course-details" key={index}>
                       <p>
                         <b>Course ID:</b>
-                        {course.courseID}
+                        {course._id}
                       </p>
                       <p>
                         <b>Course Name:</b>
-                        {course.courseName}
+                        {course.name}
                       </p>
                       <p>
                         <button
@@ -64,7 +93,7 @@ function LearningPortal() {
                       <iframe
                         width="400"
                         height="200"
-                        src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
+                        src={course.url}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -95,7 +124,20 @@ function LearningPortal() {
                 <p>
                   <b>Resources</b>
                 </p>
-                <ul>
+                {courses.map((course, index) => {
+                  return (
+                    <iframe
+                      width="400"
+                      height="200"
+                      src={course}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="Embedded youtube"
+                    />
+                  )
+                })}
+                {/* <ul>
                   <li>
                     <iframe
                       width="400"
@@ -140,7 +182,7 @@ function LearningPortal() {
                       title="Embedded youtube"
                     />
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </>
           )}
