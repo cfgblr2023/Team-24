@@ -16,7 +16,7 @@ const About = () => {
     <>
     <div id="cr_index" className="mx-2">
         <div className="container-fluid bg-success my-2 p-3 d-flex justify-content-center border rounded-3"> <h1>Create a resource</h1> </div>
-    <form>
+    <form method="post" enctype="multipart/form-data">
      <table>
             <tr >
                 <td>
