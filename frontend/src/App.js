@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import Authentication from "./components/ChatApplication/Authentication"
 import ChatsPage from "./components/ChatApplication/ChatsPage"
 import FundRaiser from "./components/FundRaiser";
+import Speech from "./components/Speech/Speech";
+import "./components/Navbar.css"
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
           <Route path="/authentication" element={<Authentication />} />
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/fund" element={<FundRaiser />} />
+          <Route path="/speech" element={<Speech />} />
 
           
         </Routes>
