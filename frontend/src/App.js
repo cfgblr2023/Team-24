@@ -11,6 +11,7 @@ import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
 import Contact from "./Components/Contact";
 import Volunteer_offline from "./Components/Volunteer_offline";
+import Women from "./Components/Women";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/speech" element={<Speech />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/offline" element={<Volunteer_offline />} />
+          <Route path="/women" element={<Women />} />
 
           
           {/* endpoints about and createResource created */}
