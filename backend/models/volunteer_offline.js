@@ -7,7 +7,8 @@ const volunteerOfflineSchema = new mongoose.Schema({
     contact: String,
     location: String,
     date: String,
-    slot: String
+    slot: String,
+    course: String
 });
 
 module.exports = OfflineClass = mongoose.model('offlineClasses', volunteerOfflineSchema);

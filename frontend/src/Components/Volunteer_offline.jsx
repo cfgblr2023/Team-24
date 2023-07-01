@@ -9,12 +9,23 @@ const Volunteer_offline = () => {
   const [course, setCourse] = useState("");
   const [date, setDate] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+      // e.preventDefault();
+      await axios.post("http://127.0.0.1:8000/api/add-offline-class", {
+        name: name,
+        email: email,
+        contact: number,
+        location: location,
+        course: course,
+        date: date
+    })
+      .then((res) => {console.log(res.data) ;alert("File was uploaded")})
+      .catch((err) => console.log(err))
+      
 
     console.log(name, email, number, location, course, date);
   };
-
+  
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row">

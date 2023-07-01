@@ -4,15 +4,15 @@ const mongoose = require('mongoose')
 var fs = require('fs');
 var path = require('path');
 const dotenv = require('dotenv')
-const Intern = require("./Models/interns.js")
-const Admin = require("./Models/admins.js")
-const Mission = require("./Models/missions.js")
-const Internship = require("./Models/internships.js")
+// const Intern = require("./Models/interns.js")
+// const Admin = require("./Models/admins.js")
+// const Mission = require("./Models/missions.js")
+// const Internship = require("./Models/internships.js")
 const Video = require("./models/Video.js")
 const OfflineClass = require("./Models/volunteer_offline.js")
 
 // initalizations and config
-const PORT = process.env.PORT ? process.env.PORT : 6000;
+const PORT = process.env.PORT ? process.env.PORT : 8000;
 dotenv.config()
 
 mongoose.connect(process.env.DB_CONNECTION_STRING + process.env.DB_NAME)
@@ -26,6 +26,11 @@ app.use(cors());
 // verification for server is working
 
 app.get("/api/", (req, res) => {
+    res.send("App is Working");
+});
+
+
+app.get("/api/test", (req, res) => {
     res.send("App is Working");
 });
 
