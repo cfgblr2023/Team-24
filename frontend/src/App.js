@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import Authentication from "./components/ChatApplication/Authentication"
-import ChatsPage from "./components/ChatApplication/ChatsPage"
-import FundRaiser from "./components/FundRaiser";
-import About from "./components/About";
-import CreateResource from "./components/CreateResource";
+import Home from "./Components/Home";
+import Navbar from "./Components/Navbar";
+import Authentication from "./Components/ChatApplication/Authentication"
+import ChatsPage from "./Components/ChatApplication/ChatsPage"
+import FundRaiser from "./Components/FundRaiser";
+import About from "./Components/About";
+import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
 
 function App() {
