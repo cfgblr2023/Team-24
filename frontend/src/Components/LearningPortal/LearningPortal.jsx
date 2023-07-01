@@ -1,59 +1,84 @@
-import React from 'react'
-import { useState } from 'react'
-import "./LearningPortal.css"
+import React from "react";
+import { useState, useRef } from "react";
+import "./LearningPortal.css";
 
 function LearningPortal() {
-    const [currentView, setCurrentView] = useState("volunteer")
-    const [currentStudentView, setCurrentStudentView] = useState("list")
-    const [currentUser, setCurrentUser] = useState({name: "Yash Seth", id: "1001"})
-    const data = [
-        {courseName: "abc", courseID: "123"},
-        {courseName: "xyz", courseID: "124"},
-        {courseName: "ijk", courseID: "125"},
-        {courseName: "pqr", courseID: "126"},
-    ]
+  const [currentView, setCurrentView] = useState("student");
+  const [currentStudentView, setCurrentStudentView] = useState("list");
+  const [currentUser, setCurrentUser] = useState({
+    name: "Yash Seth",
+    id: "1001",
+  });
+  const data = [
+    { courseName: "abc", courseID: "123" },
+    { courseName: "xyz", courseID: "124" },
+    { courseName: "ijk", courseID: "125" },
+    { courseName: "pqr", courseID: "126" },
+  ];
 
-    const [currentCourse, setCurrentCourse] = useState()
+  const [currentCourse, setCurrentCourse] = useState();
 
-    const toggleView = (view) => {
-        setCurrentStudentView(view)
-    }
+  const toggleView = (view) => {
+    setCurrentStudentView(view);
+  };
   return (
-    <div className='learning-portal-main'>
-        <p>Welcome {currentUser.name}</p>
-                <button onClick={() => toggleView("enrolled")}>Enrolled Courses</button>
-                <button onClick={() => toggleView("list")}>View Courses</button>
-                <button onClick={() => toggleView("compelted")}>Completed</button>
-        {currentView === "volunteer" && currentStudentView === "list" && <>
-            <div>
-                <table>
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Mission Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+    <div className="learning-portal-main">
+      {currentView === "student" && (
+        <>
+          <p>Welcome {currentUser.name}</p>
+          <button onClick={() => toggleView("enrolled")}>
+            Enrolled Courses
+          </button>
+          <button onClick={() => toggleView("list")}>View Courses</button>
+          <button onClick={() => toggleView("compelted")}>Completed</button>
+            <div className="course-list">
+                {currentStudentView === "list" && (
+                <>
                         {data.map((course, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{course.courseID}</td>
-                                    <td>{course.courseName}</td>
-                                    <td><button onClick={() => {setCurrentCourse(course.courseName)}}>Enroll</button></td>
-                                </tr>
-                            )
+                        return (
+                            <div className="course-details" key={index}>
+                            <p><b>Course ID:</b>{course.courseID}</p>
+                            <p><b>Course Name:</b>{course.courseName}</p>
+                            <p>
+                                <button
+                                onClick={() => {
+                                    setCurrentCourse(course.courseName);
+                                }}
+                                >
+                                Enroll
+                                </button>
+                            </p>
+                            <iframe
+                                width="400"
+                                height="200"
+                                src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                title="Embedded youtube"
+                            />
+                            </div>
+                        );
                         })}
-                  </tbody>
-                </table>
+                </>
+                )}
             </div>
-        </>}
-        {currentView === "volunteer" && currentStudentView === "enrolled" && <>
-            <div>
-                <p>You are currently enrolled {currentCourse}</p>{}
-            </div>
-        </>}
+            {currentStudentView === "enrolled" && (
+            <>
+                <div>
+                <p>You are currently enrolled {currentCourse}</p>
+                </div>
+            </>
+            )}
+        </>
+      )}
+      {currentView === "volunteer" && (
+        <>
+          <div>Volunteer View</div>
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default LearningPortal
+export default LearningPortal;
