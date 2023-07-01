@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Speech from "./Components/Speech/Speech";
 import "./Components/Navbar.css";
 import Home from "./Components/Home";
@@ -10,9 +9,6 @@ import FundRaiser from "./Components/FundRaiser";
 import About from "./Components/About";
 import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
-
-
-
 
 function App() {
   return (
