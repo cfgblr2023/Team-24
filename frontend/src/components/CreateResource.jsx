@@ -36,6 +36,24 @@ const About = () => {
                 </td>
             </tr>
             <tr >
+                <td>
+                    <label for="tut_title">
+                        Title of Tutorial
+                    </label>
+                </td>
+                <td><input disabled="true" type="text" id="tut_title" name ="tut_title" required value="Name from backend "/>
+                </td>
+            </tr>
+            <tr >
+                <td>
+                    <label for="tut_desc">
+                        Desc. of Video
+                    </label>
+                </td>
+                <td><input disabled="true" type="text" id="tut_desc"  name="tut_desc" required value="Name from backend "/>
+                </td>
+            </tr>
+            <tr >
                 <td><label for="file">
                         Upload the recording
                     </label>
