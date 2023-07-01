@@ -20,6 +20,9 @@ function Navbar({ isInternAuthenticated, setIsInternAuthenticated }) {
         <Link to="/missions" style={{ textDecoration: "none", color: "black" }}>
           <button className="nav-controls-btns">Missions</button>
         </Link>
+        <Link to="/learning-portal" style={{ textDecoration: "none", color: "black" }}>
+          <button className="nav-controls-btns">Learning Portal</button>
+        </Link>
         {(isAuthenticated || isInternAuthenticated) && <Link to="/dashboard" style={{ textDecoration: "none", color: "black" }}>
           <button className="nav-controls-btns">Dashboard</button>
         </Link>}
