@@ -70,7 +70,14 @@ const Navbar = () => {
                 <h1>FundRaiser</h1>
               </a>
             </li>
-            <li className="nav-item dropdown d-flex align-items-center">
+            
+            <select className="border-0" style={{"background":"transparent",border:0}}>
+              <option style={{"background":"transparent",border:0}} > Login</option>
+              <option>Volunteer</option>
+              <option>Admin</option>
+              <option>Student</option>
+            </select>
+            {/* <li className="nav-item dropdown d-flex align-items-center">
               <a
                 className="nav-link dropdown-toggle "
                 href="#"
@@ -97,7 +104,7 @@ const Navbar = () => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
