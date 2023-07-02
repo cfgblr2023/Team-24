@@ -46,12 +46,16 @@ function LearningPortal() {
       {currentView === "student" && (
         <>
           <p>Welcome {currentUser.name}</p>
-          <button onClick={() => toggleView("enrolled")}>
-            Enrolled Courses
-          </button>
-          <button onClick={() => toggleView("list")}>View Courses</button>
-          <button onClick={() => toggleClassView("offline")}>Offline</button>
-          <button onClick={() => toggleClassView("online")}>Online</button>
+          <div className="view-btns">
+            <button className="button-3" onClick={() => toggleView("enrolled")}>
+              Enrolled Courses
+            </button>
+            <button className="button-3" onClick={() => toggleView("list")}>View Courses</button>
+          </div>
+          <div className="class-btn">
+            <button className="button-13" onClick={() => toggleClassView("offline")}>Offline</button>
+            <button className="button-13" onClick={() => toggleClassView("online")}>Online</button>
+          </div>
           <div className="course-list">
             {currentStudentView === "list" && classView === "online" && (
               <>
