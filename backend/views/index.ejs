@@ -13,25 +13,25 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 
-			$("#form1").submit(function (event) {
+			$("#form").submit(function (event) {
 				event.preventDefault();
 
 				$.ajax({
 					type: 'POST',
 					url: '/',
-					data: $('#form1').serialize(),
+					data: $('#form').serialize(),
 					dataType: "json",
 					success: function (response) {
 						//alert("a");
 						//console.log(response.Success);
-						$('#form1')[0].reset();
+						$('#form')[0].reset();
 
 						document.getElementById("check").innerHTML = response.Success;
 						//ADD THIS CODE
 						setTimeout(function () {
 							document.getElementById("check").innerHTML = "";
 						}, 3000);
-						if (response.Success == "You are regestered,You can login now.") {
+						if (response.Success == "You are registered,You can login now.") {
 							document.getElementById("aa").click();
 						};
 					},
@@ -51,7 +51,7 @@
 			</p>
 		</div>
 		<div class="form-group">
-			<form id="form1" method="post">
+			<form id="form" method="post">
 				<input type="email" name="email" placeholder="E-mail" required="" class="form-control"><br />
 				<input type="string" name="contact" placeholder="Contact" required="" class="form-control"><br />
 				<input type="text" name="username" placeholder="Username" required="" class="form-control"><br />

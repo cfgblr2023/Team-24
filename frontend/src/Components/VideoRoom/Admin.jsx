@@ -14,11 +14,11 @@ const Admin = () => {
     const [approvedRequests, setApprovedRequests] = useState([]);
     const [declinedRequests, setDeclinedRequests] = useState([]);
 
-    const handleApprove = (id) => {
+    const handleApprove = (id, username) => {
         console.log(id)
         // Move the users to the approved list
-        axios.post(`http://127.0.0.1:4000/${id}`,{
-            "registration":true
+        axios.post(`http://127.0.0.1:4000/${id}`, {
+            "registration": true
         }).then((response) => {
             console.log(response.data);
         }).catch(err => console.log(err))
@@ -26,7 +26,7 @@ const Admin = () => {
         setApprovedRequests((prevApproved) => [...prevApproved, id]);
         // Perform further actions for approval if needed
         alert(
-            "Request of " + users.username + "(Request _id-" + users._id + ")" + " has been approved!"
+            "Request of " + users.username + "(Request _id-" + users.id + ")" + " has been approved!"
         );
     };
 
@@ -49,7 +49,7 @@ const Admin = () => {
             <div key={users._id} className="request">
                 <div className="request-username">{users.username}</div>
                 <div className="action-buttons">
-                    <button onClick={() => handleApprove(users._id)}>Approve</button>
+                    <button onClick={() => handleApprove(users._id, users.username)}>Approve</button>
                     <button onClick={() => handleDecline(users)}>Decline</button>
                     <button onClick={() => handleViewProfile(users)}>View Profile</button>
                 </div>
@@ -86,14 +86,6 @@ const Admin = () => {
                     <p>Please review and approve or decline the following requests:</p>
                     <div className="requestContainer">{renderRequests()}</div>
                 </div>
-            </div>
-            <div>
-                <h2 className="accepted-req"> Approved Requests </h2>
-                <div className="approvedContainer">{renderApprovedRequests()}</div>
-            </div>
-            <div>
-                <h2 className="declined-req">Declined Requests</h2>
-                <div className="declinedContainer">{renderDeclinedRequests()}</div>
             </div>
         </>
     );

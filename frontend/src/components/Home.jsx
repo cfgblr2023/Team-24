@@ -18,7 +18,8 @@ const Home = () => {
   };
 
   const handleVolunteer = () => {
-    navigate("/volunteer");
+    window.open("http://127.0.0.1:4000/", "_blank");
+    //navigate("/volunteer");
   };
 
   return (
@@ -56,8 +57,8 @@ const Home = () => {
               Volunteer
             </button>
           </div>
-          
-        </div>
+
+        </div >
         <hr className="mx-auto w-50" />
         <div className="row mt-5 text-center">
           <div className="col-12">
@@ -79,8 +80,8 @@ const Home = () => {
             </button>
           </div>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };
 

@@ -1,6 +1,11 @@
 var express = require('express');
+var cors = require("cors");
 var router = express.Router();
 var User = require('../models/user');
+// const { ObjectId } = require('mongodb');
+var ObjectId = require('mongodb').ObjectID;
+
+router.use(cors());
 
 router.get('/', function (req, res, next) {
 	return res.render('index.ejs');
@@ -36,8 +41,8 @@ router.post('/', function (req, res, next) {
 							username: personInfo.username,
 							password: personInfo.password,
 							passwordConf: personInfo.passwordConf,
-							course: personInfo.course
-
+							course: personInfo.course,
+							registration: personInfo.registration
 						});
 
 						newPerson.save(function (err, Person) {
@@ -93,7 +98,7 @@ router.get('/profile', function (req, res, next) {
 			res.redirect('/');
 		} else {
 			//console.log("found");
-			return res.render('data.ejs', { "name": data.username, "email": data.email });
+			return res.render('data.ejs', { "name": data.username, "email": data.email, "registration": data.registration });
 		}
 	});
 });
@@ -143,5 +148,45 @@ router.post('/forgetpass', function (req, res, next) {
 	});
 
 });
+
+
+router.get('/users', async function (req, res, next) {
+	await User.find({}, function (err, users) {
+		if (err) {
+			console.log(err);
+			return res.status(500).send({ "Error": "Something went wrong." });
+		}
+
+		res.status(200).send(users);
+	});
+});
+
+router.post('/:id', function (req, res, next) {
+	var id = req.params.id;
+	var updates = req.body;
+	console.log(id, typeof (id))
+	console.log("api was called")
+	// User.findOne(find(id)), (err, obj) => {
+	// 	console.log("error:", err);
+	// 	console.log("object", obj);
+	// })
+	let objectId = new ObjectId(id.trim());
+	console.log(objectId);
+	User.findById(ObjectId(id.trim()), function (err, obj) {
+		console.log(err);
+		console.log(obj)
+	});
+	User.findByIdAndUpdate(id, updates, { new: true }, function (err, user) {
+		if (err) {
+			console.log(err)
+			res.send({ "Error": "An error occurred while updating the user." });
+		} else {
+			res.send(user);
+		}
+	});
+});
+
+// ...
+
 
 module.exports = router;
