@@ -108,7 +108,10 @@ function LearningPortal() {
                   You are currently enrolled to course: <b>{currentCourse}</b>
                 </h4>
                 {!joined && (
-                  <button onClick={() => setJoined(true)}>Connect with Teacher</button>
+                  <>
+                    <button onClick={() => setJoined(true)}>Connect with Teacher</button>
+                    <button><a href="https://meet.google.com/fwr-watn-cvo" target="_blank" rel="noreferrer">Join Live Session</a></button>
+                  </>
                 )}
 
                 {joined && (
