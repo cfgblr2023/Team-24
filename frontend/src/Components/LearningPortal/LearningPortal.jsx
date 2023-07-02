@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import "./LearningPortal.css";
 import VideoRoom from "../VideoRoom/VideoRoom";
 import axios from "axios"
+import Student_offline from "../Student_offline";
 
 function LearningPortal() {
   const [currentView, setCurrentView] = useState("student");
   const [joined, setJoined] = useState(false);
   const [currentStudentView, setCurrentStudentView] = useState("list");
   const [courses, setCourses] = useState([]);
+  const [classView, toggleClassView] = useState("online")
   const [currentUser, setCurrentUser] = useState({
     name: "Yash Seth",
     id: "1001",
@@ -20,20 +22,6 @@ function LearningPortal() {
     { courseName: "ijk", courseID: "125" },
     { courseName: "pqr", courseID: "126" },
   ];
-
-//   const handleSubmit = async (e) => {
-//     // e.preventDefault();
-//     await axios.post("http://127.0.0.1:8000/api/add-offline-class", {
-//       name: name,
-//       email: email,
-//       contact: number,
-//       location: location,
-//       course: course,
-//       date: date
-//   })
-//     .then((res) => {console.log(res.data) ;alert("File was uploaded")})
-//     .catch((err) => console.log(err))
-// }
 
   const fetchFiles = async (e) => {
     // e.preventDefault();
@@ -55,10 +43,6 @@ function LearningPortal() {
   };
   return (
     <div className="learning-portal-main">
-    {<>
-        <button onClick={() => setCurrentView("volunteer")}>Volunteer</button>
-        <button onClick={() => setCurrentView("student")}>Student</button>
-    </>}
       {currentView === "student" && (
         <>
           <p>Welcome {currentUser.name}</p>
@@ -66,9 +50,10 @@ function LearningPortal() {
             Enrolled Courses
           </button>
           <button onClick={() => toggleView("list")}>View Courses</button>
-          <button onClick={() => toggleView("compelted")}>Completed</button>
+          <button onClick={() => toggleClassView("offline")}>Offline</button>
+          <button onClick={() => toggleClassView("online")}>Online</button>
           <div className="course-list">
-            {currentStudentView === "list" && (
+            {currentStudentView === "list" && classView === "online" && (
               <>
                 {courses.map((course, index) => {
                   return (
@@ -104,6 +89,11 @@ function LearningPortal() {
                 })}
               </>
             )}
+            {currentStudentView === "list" && classView === "offline" && 
+            (<div>
+                <Student_offline />
+              </div>
+              )}
           </div>
           {currentStudentView === "enrolled" && (
             <>
@@ -129,7 +119,7 @@ function LearningPortal() {
                     <iframe
                       width="400"
                       height="200"
-                      src={course}
+                      src={course.url}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -137,70 +127,9 @@ function LearningPortal() {
                     />
                   )
                 })}
-                {/* <ul>
-                  <li>
-                    <iframe
-                      width="400"
-                      height="200"
-                      src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </li>
-                  <li>
-                    <iframe
-                      width="400"
-                      height="200"
-                      src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </li>
-                  <li>
-                    <iframe
-                      width="400"
-                      height="200"
-                      src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </li>
-                  <li>
-                    <iframe
-                      width="400"
-                      height="200"
-                      src={`https://www.youtube.com/embed/UGFZcD7NYZk`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="Embedded youtube"
-                    />
-                  </li>
-                </ul> */}
               </div>
             </>
           )}
-        </>
-      )}
-      {currentView === "volunteer" && (
-        <>
-          <div>Volunteer View</div>
-          {!joined && (
-                  <button onClick={() => setJoined(true)}>Connect to Student</button>
-                )}
-
-                {joined && (
-                  <>
-                    <button onClick={() => setJoined(false)}>Leave call</button>
-                    <VideoRoom />
-                  </>
-                )}
         </>
       )}
     </div>

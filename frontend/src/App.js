@@ -9,6 +9,7 @@ import FundRaiser from "./Components/FundRaiser";
 import About from "./Components/About";
 import CreateResource from "./Components/CreateResource";
 import LearningPortal from "./Components/LearningPortal/LearningPortal";
+import LearningPortalVolunteer from "./Components/LearningPortal/LearningPortalVolunteer";
 import Contact from "./Components/Contact";
 import Volunteer_offline from "./Components/Volunteer_offline";
 import Women from "./Components/Women";
@@ -36,6 +37,7 @@ function App() {
           {/* check authentication authenticated user can fill this form */}
           <Route path="/createResource" element={<CreateResource />} />
           <Route exact path="/learning-portal" element={<LearningPortal />}></Route>
+          <Route exact path="/learning-portal-volunteer" element={<LearningPortalVolunteer />}></Route>
         </Routes>
       
     </Router>

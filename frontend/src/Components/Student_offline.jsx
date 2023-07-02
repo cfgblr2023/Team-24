@@ -2,44 +2,38 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/jsx-key */
 import React from "react";
+import axios from "axios"
+import { useState, useEffect } from "react";
 
-const Student_offline = () => {
-  const items = [
-    {
-      name: "lagan",
-      email: "lag@gmail.com",
-      course: "course1",
-      location: "location",
-    },
-    {
-      name: "avavsva",
-      email: "avvvv@gmail.com",
-      course: "course2",
-      location: "locatiadvadvdavon",
-    },
-  ];
+function Student_offline() {
+  const [classes, setClasses] = useState([]);
+  const fetchClass = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/api/get-offline-classes")
+      .then((response) => {
+        console.log(response.data);
+        setClasses(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  //   useEffect(() => {
-  //     axios
-  //       .get("")
-  //       .then((response) => {
-  //         console.log(response.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   });
+  useEffect(() => {
+    fetchClass();
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
-        {items.map((item) => {
+        {classes.map((c, index) => {
           return (
-            <div className="card w-50">
+            <div className="card w-100">
               <div className="card-body">
-                <h5 className="card-title">Name of Volunteer:{item.name}</h5>
+                <h5 className="card-title">Name of Volunteer:{c.name}</h5>
                 <p className="card-text">
-                  Course:{item.course}
-                  Location:{item.location}
+                  Course:{c.course}
+                  Location:{c.location}
                 </p>
 
                 <a href="#" className="btn btn-primary">
@@ -52,6 +46,6 @@ const Student_offline = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Student_offline;
