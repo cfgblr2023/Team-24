@@ -44,7 +44,7 @@ function LearningPortal() {
   return (
     <div className="learning-portal-main">
         <>
-          <div>Volunteer View</div>
+          <div><h4>Volunteer View</h4></div>
           {!joined && (
                   <button className="button-3" onClick={() => setJoined(true)}>Connect to Student</button>
                 )}

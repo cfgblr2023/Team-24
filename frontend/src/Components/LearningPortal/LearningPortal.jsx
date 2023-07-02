@@ -45,17 +45,19 @@ function LearningPortal() {
     <div className="learning-portal-main">
       {currentView === "student" && (
         <>
-          <p>Welcome {currentUser.name}</p>
+          <h4>Welcome {currentUser.name}</h4>
           <div className="view-btns">
             <button className="button-3" onClick={() => toggleView("enrolled")}>
               Enrolled Courses
             </button>
             <button className="button-3" onClick={() => toggleView("list")}>View Courses</button>
           </div>
+          {currentStudentView === "list" && 
           <div className="class-btn">
             <button className="button-13" onClick={() => toggleClassView("offline")}>Offline</button>
             <button className="button-13" onClick={() => toggleClassView("online")}>Online</button>
           </div>
+          }
           <div className="course-list">
             {currentStudentView === "list" && classView === "online" && (
               <>
@@ -102,9 +104,9 @@ function LearningPortal() {
           {currentStudentView === "enrolled" && (
             <>
               <div className="course-resources">
-                <p>
+                <h4>
                   You are currently enrolled to course: <b>{currentCourse}</b>
-                </p>
+                </h4>
                 {!joined && (
                   <button onClick={() => setJoined(true)}>Connect with Teacher</button>
                 )}
@@ -121,6 +123,7 @@ function LearningPortal() {
                 {courses.map((course, index) => {
                   return (
                     <iframe
+                      key = {index}
                       width="400"
                       height="200"
                       src={course.url}

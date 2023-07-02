@@ -73,13 +73,13 @@ const CreateResource = () => {
                 </td>
             </tr>
             <tr >
-                <td><label for="url">
+                <td><label htmlFor="url">
                         Upload the recording URL
                     </label>
                 </td>
                 <td>
                     <tr>
-                    <input placeholder="Upload the recording URL" id="url" type="url" value={fileURL} onChange={handleFormURLChange}/>
+                    <input placeholder="Upload the recording URL" name="url" id="url" type="url" value={fileURL} onChange={handleFormURLChange}/>
                     </tr>
                     <tr>
                 {/* <video id="up_video" style={{height: "180px", width: "320px"}}></video> */}
