@@ -46,15 +46,16 @@ function LearningPortal() {
         <>
           <div>Volunteer View</div>
           {!joined && (
-                  <button onClick={() => setJoined(true)}>Connect to Student</button>
+                  <button className="button-3" onClick={() => setJoined(true)}>Connect to Student</button>
                 )}
 
                 {joined && (
                   <>
-                    <button onClick={() => setJoined(false)}>Leave call</button>
+                    <button className="button-3" onClick={() => setJoined(false)}>Leave call</button>
                     <VideoRoom />
                   </>
                 )}
+                <a href="http://localhost:3000/createResource"><button className="button-3">Create Course Resource</button></a>
         </>
     </div>
   );
