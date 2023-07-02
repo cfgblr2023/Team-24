@@ -2,6 +2,7 @@
 import React from "react";
 import axios from 'axios'
 import { useState } from 'react'
+import "./CreateResource.css"
 
 const CreateResource = () => {
     const [fileName, setFileName] = useState("")
@@ -33,6 +34,7 @@ const CreateResource = () => {
     <>
     <div id="cr_index" className="mx-2">
         <div className="container-fluid bg-success my-2 p-3 d-flex justify-content-center border rounded-3"> <h1>Create a resource</h1> </div>
+    <div className="resource-main">
     <form method="post" encType="multipart/form-data">
      <table>
             <tr >
@@ -72,15 +74,15 @@ const CreateResource = () => {
             </tr>
             <tr >
                 <td><label for="url">
-                        Upload the recording
+                        Upload the recording URL
                     </label>
                 </td>
                 <td>
                     <tr>
-                    <input id="url" type="url" value={fileURL} onChange={handleFormURLChange}/>
+                    <input placeholder="Upload the recording URL" id="url" type="url" value={fileURL} onChange={handleFormURLChange}/>
                     </tr>
                     <tr>
-                <video id="up_video" style={{height: "180px", width: "320px"}}></video>
+                {/* <video id="up_video" style={{height: "180px", width: "320px"}}></video> */}
                     </tr>
                 </td>
             </tr>
@@ -90,6 +92,7 @@ const CreateResource = () => {
     </table>
 
     </form>
+    </div>
     </div>
     </>
   );

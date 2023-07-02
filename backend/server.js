@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('mongodb+srv://yash_seth:yash_seth@cluster0.egbzd.mongodb.net/MockupVolunteer?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://yash_seth:yash_seth@cluster0.egbzd.mongodb.net/CFG?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, (err) => {
