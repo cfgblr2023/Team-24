@@ -63,7 +63,7 @@ const Home = () => {
         <div className="row mt-5 text-center">
           <div className="col-12">
             <h1 className="para1" style={{color:"white"}}>
-              <strong>We provide education for dropouts, poor, women</strong>
+              <strong>Empowering Volunteers, Enriching Communities</strong>
             </h1>
           </div>
         </div>

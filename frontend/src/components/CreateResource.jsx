@@ -27,7 +27,7 @@ const CreateResource = () => {
             url: fileURL,
             name: fileName,
             desc: fileDesc})
-        .then(() => alert("File was uploaded"))
+        .then(() => {alert("File was uploaded"); window.location("http://localhost:3000/learning-portal-volunteer");})
         .catch(() => alert("There was an error, please try again!"))
     }
   return (
