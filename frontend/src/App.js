@@ -17,29 +17,30 @@ import Student_offline from "./Components/Student_offline";
 import StudentLogin from "./Components/StudentLogin";
 import Admin from "./Components/VideoRoom/Admin";
 
+
 function App() {
   return (
     <Router>
-        <Navbar/>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/authentication" element={<Authentication />} />
-          <Route path="/chats" element={<ChatsPage />} />
-          <Route path="/fund" element={<FundRaiser />} />
-          <Route path="/speech" element={<Speech />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/offline" element={<Volunteer_offline />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/studentoffine" element={<Student_offline />} />
-          <Route path="/studentLogin" element={<StudentLogin/>} />
-          <Route path='/admin' element={<Admin/>}/>
-          <Route path="/about" element={<About />} />
-          {/* check authentication authenticated user can fill this form */}
-          <Route path="/createResource" element={<CreateResource />} />
-          <Route exact path="/learning-portal" element={<LearningPortal />}></Route>
-          <Route exact path="/learning-portal-volunteer" element={<LearningPortalVolunteer />}></Route>
-        </Routes>
-      
+      <Navbar />
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/authentication" element={<Authentication />} />
+        <Route path="/chats" element={<ChatsPage />} />
+        <Route path="/fund" element={<FundRaiser />} />
+        <Route path="/speech" element={<Speech />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/offline" element={<Volunteer_offline />} />
+        <Route path="/women" element={<Women />} />
+        <Route path="/studentoffine" element={<Student_offline />} />
+        <Route path="/studentLogin" element={<StudentLogin />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path="/about" element={<About />} />
+        {/* check authentication authenticated user can fill this form */}
+        <Route path="/createResource" element={<CreateResource />} />
+        <Route exact path="/learning-portal" element={<LearningPortal />}></Route>
+        <Route exact path="/learning-portal-volunteer" element={<LearningPortalVolunteer />}></Route>
+      </Routes>
+
     </Router>
   );
 }

@@ -12,6 +12,10 @@ userSchema = new Schema({
 	course: {
 		type: String,
 		enum: ["course1", "course2", "course3"]
+	},
+	registration: {
+		type: Boolean,
+		default: false
 	}
 }),
 	User = mongoose.model('User', userSchema);
