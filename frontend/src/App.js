@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/authentication" element={<Authentication />} />
         <Route path="/chats" element={<ChatsPage />} />
         <Route path="/fund" element={<FundRaiser />} />

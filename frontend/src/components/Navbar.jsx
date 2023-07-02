@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/home">
+        <a className="navbar-brand" href="/">
           Lamp Lighters
         </a>
         <button
@@ -38,7 +38,7 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/home">
+                <a className="nav-link active" aria-current="page" href="/">
                   Home
                 </a>
               </li>
@@ -55,6 +55,15 @@ const Navbar = () => {
                 <a
                   className="nav-link active"
                   aria-current="page"
+                  href="/women"
+                >
+                  Success Stories
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
                   href="/contact"
                 >
                   Contact Us
@@ -65,6 +74,8 @@ const Navbar = () => {
                   MIC
                 </button>
               </li>
+              
+
               <li className="nav-item">
                 <button className="btn btn-success " onClick={handleChats}>
                   Chats

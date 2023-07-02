@@ -62,7 +62,7 @@ const Home = () => {
         <hr className="mx-auto w-50" />
         <div className="row mt-5 text-center">
           <div className="col-12">
-            <h1 className="para1">
+            <h1 className="para1" style={{color:"white"}}>
               <strong>We provide education for dropouts, poor, women</strong>
             </h1>
           </div>
@@ -72,9 +72,10 @@ const Home = () => {
             <button
               type="button"
               className="btn btn-outline-info w-100 h-100 border-0"
-              onClick={handleFund}
+              onClick={handleFund} 
+              style={{borderColor:"white",border:"5px"}}
             >
-              <h3 className="para m-auto text-decoration-underline">
+              <h3 className="para m-auto text-decoration-underline" style={{color:"white"}}>
                 <strong>Fund Raiser</strong>
               </h3>
             </button>

@@ -1,0 +1,94 @@
+*{
+    margin:0;
+    padding:0;
+}
+/* Header1 Modifications */
+.admin-heading{
+    height: 100px;
+    color:white;
+    background-color: rgb(69, 46, 184);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    font-size: 50px;
+}
+/* Description modifications */
+.descrip{
+    text-align: center;
+}
+.border:hover{
+    background-color: rgb(50, 33, 131);
+}
+/* Volunteers Modifications */
+.pending-req{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.req-approval {
+    color: #333;
+}
+
+.pending-req p {
+    color: #666;
+}
+
+.request {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.request-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.action-buttons button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: rgb(69, 46, 184);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.action-buttons button:hover {
+    background-color: rgb(50, 33, 131);
+}
+
+#approvedContainer {
+    margin-top: 20px;
+    
+}
+.accepted-req{
+    color: rgb(35, 206, 86);
+    font-size: 24px;
+}
+.approved-request {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 5px;
+    background-color: #289728;
+}
+/* declined css */
+.declined-req {
+    color: rgb(208, 63, 63);
+    font-size: 24px;
+}
+
+#declinedContainer {
+    margin-top: 20px;
+}
+.declined-request{
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: rgb(177, 50, 50);
+}

@@ -61,10 +61,10 @@ const FundRaiser = () => {
             </div>
             <div className="form-floating">
               <input
-                type="password"
+                type="number"
                 className="form-control"
-                id="floatingPassword"
-                placeholder="Password"
+                id="floatingText"
+                placeholder="text"
                 onChange={(e) => {
                   setMoney(e.target.value);
                 }}
@@ -72,7 +72,7 @@ const FundRaiser = () => {
               <label htmlFor="floatingPassword">Money</label>
             </div>
             <div className="mt-5">
-            <button type="button" className="btn btn-success " onClick={handlePay}>Success</button>
+            <button type="button" className="btn btn-success " onClick={handlePay}>Donate</button>
             </div>
           </div>
         </div>

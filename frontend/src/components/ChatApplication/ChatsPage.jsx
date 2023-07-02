@@ -10,8 +10,8 @@ const ChatsPage = () => {
   
   const chatProps = useMultiChatLogic(
     "dba1bb99-0859-49ca-a022-7a24b8630d50",
-    "surya",
-    "surya"
+    "lagan",
+    "lagan"
   );
 
   return (

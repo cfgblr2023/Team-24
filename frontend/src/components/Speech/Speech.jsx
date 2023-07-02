@@ -16,7 +16,7 @@ const Speech = () => {
     return null;
   }
 
-  const List = ["chats", "fund","home"];
+  const List = ["chats", "fund","home","women","contact","about"];
 
   const handleStop = () => {
     SpeechRecognition.stopListening();
