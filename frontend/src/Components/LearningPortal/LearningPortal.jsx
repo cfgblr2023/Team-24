@@ -43,10 +43,6 @@ function LearningPortal() {
   };
   return (
     <div className="learning-portal-main">
-    {<>
-        <button onClick={() => setCurrentView("volunteer")}>Volunteer</button>
-        <button onClick={() => setCurrentView("student")}>Student</button>
-    </>}
       {currentView === "student" && (
         <>
           <p>Welcome {currentUser.name}</p>
@@ -123,7 +119,7 @@ function LearningPortal() {
                     <iframe
                       width="400"
                       height="200"
-                      src={course}
+                      src={course.url}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -134,21 +130,6 @@ function LearningPortal() {
               </div>
             </>
           )}
-        </>
-      )}
-      {currentView === "volunteer" && (
-        <>
-          <div>Volunteer View</div>
-          {!joined && (
-                  <button onClick={() => setJoined(true)}>Connect to Student</button>
-                )}
-
-                {joined && (
-                  <>
-                    <button onClick={() => setJoined(false)}>Leave call</button>
-                    <VideoRoom />
-                  </>
-                )}
         </>
       )}
     </div>
