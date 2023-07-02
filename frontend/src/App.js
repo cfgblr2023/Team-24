@@ -13,6 +13,8 @@ import Contact from "./Components/Contact";
 import Volunteer_offline from "./Components/Volunteer_offline";
 import Women from "./Components/Women";
 import Student_offline from "./Components/Student_offline";
+import StudentLogin from "./Components/StudentLogin";
+import Admin from "./Components/VideoRoom/Admin";
 
 function App() {
   return (
@@ -28,9 +30,8 @@ function App() {
           <Route path="/offline" element={<Volunteer_offline />} />
           <Route path="/women" element={<Women />} />
           <Route path="/studentoffine" element={<Student_offline />} />
-
-          
-          {/* endpoints about and createResource created */}
+          <Route path="/studentLogin" element={<StudentLogin/>} />
+          <Route path='/admin' element={<Admin/>}/>
           <Route path="/about" element={<About />} />
           {/* check authentication authenticated user can fill this form */}
           <Route path="/createResource" element={<CreateResource />} />
