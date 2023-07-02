@@ -109,8 +109,8 @@ function LearningPortal() {
                 </h4>
                 {!joined && (
                   <>
-                    <button onClick={() => setJoined(true)}>Connect with Teacher</button>
-                    <button><a href="https://meet.google.com/fwr-watn-cvo" target="_blank" rel="noreferrer">Join Live Session</a></button>
+                    <button className="my-3" onClick={() => setJoined(true)}>Connect with Teacher</button>
+                    <button className="my-3"><a href="https://meet.google.com/fwr-watn-cvo" target="_blank" rel="noreferrer">Join Live Session</a></button>
                   </>
                 )}
 
@@ -120,12 +120,13 @@ function LearningPortal() {
                     <VideoRoom />
                   </>
                 )}
-                <p>
+                <h3>
                   <b>Resources</b>
-                </p>
+                </h3>
                 {courses.map((course, index) => {
                   return (
                     <iframe
+                     className="py-3"
                       key = {index}
                       width="400"
                       height="200"

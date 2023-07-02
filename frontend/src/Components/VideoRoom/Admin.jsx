@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './styles.css'
@@ -15,7 +16,7 @@ const Admin = () => {
     const [approvedRequests, setApprovedRequests] = useState([]);
     const [declinedRequests, setDeclinedRequests] = useState([]);
 
-    const handleApprove = (id, username) => {
+    const handleApprove = (id) => {
         console.log(id)
         // Move the users to the approved list
         axios.post(`http://127.0.0.1:4000/${id}`, {
@@ -27,7 +28,7 @@ const Admin = () => {
         setApprovedRequests((prevApproved) => [...prevApproved, id]);
         // Perform further actions for approval if needed
         alert(
-            "Request of " + users.username + "(Request _id-" + users.id + ")" + " has been approved!"
+            "Request has been approved!"
         );
     };
 
@@ -58,21 +59,21 @@ const Admin = () => {
         ));
     };
 
-    const renderApprovedRequests = () => {
-        return approvedRequests.map((users) => (
-            <div key={users._id} className="approved-request">
-                {users.username}
-            </div>
-        ));
-    };
+    // const renderApprovedRequests = () => {
+    //     return approvedRequests.map((users) => (
+    //         <div key={users._id} className="approved-request">
+    //             {users.username}
+    //         </div>
+    //     ));
+    // };
 
-    const renderDeclinedRequests = () => {
-        return declinedRequests.map((users) => (
-            <div key={users._id} className="declined-request">
-                {users.username}
-            </div>
-        ));
-    };
+    // const renderDeclinedRequests = () => {
+    //     return declinedRequests.map((users) => (
+    //         <div key={users._id} className="declined-request">
+    //             {users.username}
+    //         </div>
+    //     ));
+    // };
 
     return (
         <>
