@@ -1,8 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import './StudentLogin.css'
+import { useNavigate } from "react-router-dom";
 
 const StudentLogin = () => {
+  const handleRedirectStudentLogin = () => {
+    Navigate("/learning-portal");
+  };
   return (
     <div className="login-box">
  
@@ -15,7 +19,7 @@ const StudentLogin = () => {
       <input type="password" name="" required=""/>
       <label htmlFor='password'>Password</label>
     </div><center>
-    <a href="#">
+    <a href="http://localhost:3000/learning-portal">
            SEND
        <span></span>
     </a></center>
